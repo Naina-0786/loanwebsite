@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `otp` MODIFY `otp` VARCHAR(191) NOT NULL,
+    MODIFY `number` VARCHAR(191) NOT NULL;

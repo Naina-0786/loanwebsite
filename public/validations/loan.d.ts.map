@@ -1,0 +1,1 @@
+{"version":3,"file":"loan.d.ts","sourceRoot":"","sources":["../../src/validations/loan.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,CAAC,EAAE,MAAM,KAAK,CAAC;AAQxB,eAAO,MAAM,cAAc;;;;;;;;;;;;;iBAczB,CAAC;AAGH,eAAO,MAAM,2BAA2B;;;;;;;;;;;;;;;;;;;;;iBAiEtC,CAAC;AAIH,eAAO,MAAM,uBAAuB,uGAO1B,CAAC;AAEX,MAAM,MAAM,sBAAsB,GAAG,OAAO,uBAAuB,CAAC,MAAM,CAAC,CAAC"}

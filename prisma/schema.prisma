@@ -24,31 +24,69 @@ model Admin {
   updated  DateTime @updatedAt
 }
 
-model User {
-  id           Int        @id @default(autoincrement())
-  name         String
-  email        String     @unique
-  aadharcard   String
-  pancard      String
-  fathername   String
-  address      String
-  pincode      String
-  mobilenumber String
-  paymentSs    Json
-  loanStatus   LoanStatus @default(Pending)
-  created      DateTime   @default(now())
-  updated      DateTime   @updatedAt
+model PaymentFee {
+  id                      Int    @id @default(autoincrement())
+  processingFee           String
+  bankTransactionPaperFee String
+  insuranceFee            String
+  cibilFee                String
+  tdsFee                  String
+  nocFee                  String
 }
 
-enum LoanStatus {
-  Pending
-  Approved
-  processing
-  cancel
+model LoanApplication {
+  id           Int     @id @default(autoincrement())
+  email        String
+  phone        String?
+  loanAmount   String?
+  interest     String?
+  loanTenure   String?
+  aadharNumber String?
+  panNumber    String?
+  fullName     String?
+  fatherName   String?
+  address      String?
+  pincode      String?
+
+  // Bank details
+  bankName      String?
+  accountNumber String?
+  ifscCode      String?
+
+  processingFee       Json?
+  processingFeeStatus Status @default(PENDING)
+
+  bankTransactionPaperFee Json?
+  bankTransactionStatus   Status @default(PENDING)
+
+  insuranceFee    Json?
+  insuranceStatus Status @default(PENDING)
+
+  cibilFee    Json?
+  cibilStatus Status @default(PENDING)
+
+  tdsFee    Json?
+  tdsStatus Status @default(PENDING)
+
+  nocFee    Json?
+  nocStatus Status @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 model Otp {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  otp   Int
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  otp       String
+  expiresAt DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

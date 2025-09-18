@@ -1,0 +1,40 @@
+import { z } from "zod";
+export declare const loanValidation: z.ZodObject<{
+    email: z.ZodString;
+    fathername: z.ZodString;
+    address: z.ZodOptional<z.ZodString>;
+    pincode: z.ZodOptional<z.ZodString>;
+    phone: z.ZodOptional<z.ZodString>;
+    loanAmount: z.ZodOptional<z.ZodString>;
+    interest: z.ZodOptional<z.ZodString>;
+    loanTenure: z.ZodOptional<z.ZodInt>;
+    aadharNumber: z.ZodOptional<z.ZodString>;
+    panNumber: z.ZodOptional<z.ZodString>;
+    fullName: z.ZodOptional<z.ZodString>;
+    isProcessingFeeApproved: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export declare const updateLoanApplicationSchema: z.ZodObject<{
+    email: z.ZodOptional<z.ZodString>;
+    phone: z.ZodOptional<z.ZodString>;
+    loanAmount: z.ZodOptional<z.ZodString>;
+    interest: z.ZodOptional<z.ZodString>;
+    loanTenure: z.ZodOptional<z.ZodNumber>;
+    aadharNumber: z.ZodOptional<z.ZodString>;
+    panNumber: z.ZodOptional<z.ZodString>;
+    fullName: z.ZodOptional<z.ZodString>;
+    fatherName: z.ZodOptional<z.ZodString>;
+    address: z.ZodOptional<z.ZodString>;
+    pincode: z.ZodOptional<z.ZodString>;
+    bankName: z.ZodOptional<z.ZodString>;
+    accountNumber: z.ZodOptional<z.ZodString>;
+    ifscCode: z.ZodOptional<z.ZodString>;
+    isProcessingFeeApproved: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<boolean, string>>>;
+    isBankTransactionApproved: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<boolean, string>>>;
+    isInsuranceApproved: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<boolean, string>>>;
+    isCibilApproved: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<boolean, string>>>;
+    isTdsApproved: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<boolean, string>>>;
+    isNocApproved: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<boolean, string>>>;
+}, z.core.$strip>;
+export declare const paymentScreenshotFields: readonly ["processingFee", "bankTransactionPaperFee", "insuranceFee", "cibilFee", "tdsFee", "nocFee"];
+export type PaymentScreenshotField = typeof paymentScreenshotFields[number];
+//# sourceMappingURL=loan.d.ts.map
