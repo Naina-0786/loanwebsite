@@ -98,6 +98,9 @@ export const createPaymentFee = asyncHandler(async (req, res, next) => {
 // Update loan application with payment screenshots and approval status
 export const updateLoanApplication = asyncHandler(async (req: Request, res, next) => {
     const applicationId = Number(req.params.id);
+
+    console.log("update loan application payload", req.body)
+    console.log('Received req.files:', req.files);
     
     if (!applicationId) {
         return next(new ErrorResponse("Application ID is required", 400));

@@ -62,7 +62,7 @@ export declare const updateLoanApplicationSchema: z.ZodObject<{
         APPROVED: "APPROVED";
         REJECTED: "REJECTED";
     }>>;
-}, z.core.$strict>;
+}, z.core.$strip>;
 export declare const paymentScreenshotFields: readonly ["processingFee", "bankTransactionPaperFee", "insuranceFee", "cibilFee", "tdsFee", "nocFee"];
 export type PaymentScreenshotField = typeof paymentScreenshotFields[number];
 //# sourceMappingURL=loan-application.d.ts.map

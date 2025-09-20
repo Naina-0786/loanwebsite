@@ -29,7 +29,7 @@ export const updateLoanApplicationSchema = z.object({
     loanAmount: z.string().optional(),
     interest: z.string().optional(),
     loanTenure: z.union([z.string(), z.number()]).optional(),
-    aadharNumber: z.string().min(12).optional(),
+    aadharNumber: z.string().optional(),
     panNumber: z.string().optional(),
     fullName: z.string().optional(),
     fatherName: z.string().optional(),
@@ -45,7 +45,7 @@ export const updateLoanApplicationSchema = z.object({
     cibilStatus: statusEnum.optional(),
     tdsStatus: statusEnum.optional(),
     nocStatus: statusEnum.optional(),
-}).strict();
+});
 // Schema for payment screenshot fields (for file uploads)
 export const paymentScreenshotFields = [
     "processingFee",

@@ -91,7 +91,9 @@ app.put("/api/admin/payment-fees/:id", updatePaymentFeeConfig)
 // Admin loan application management routes
 app.get("/api/loan-applications", getAllLoanApplications)
 app.get("/api/loan-applications/:id", getLoanApplicationById)
+app.post('/api/loan-applications/:id/kyc', updateLoanApplication);
 app.post("/api/loan-applications/:id", uploadPaymentScreenshots, updateLoanApplication)
+
 app.post("/api/loan-applications/:id/fees/:feeType", updateFeeStatus)
 
 // Admin dashboard routes

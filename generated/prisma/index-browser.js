@@ -180,6 +180,12 @@ exports.Prisma.OtpScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  phoneNumber: 'phoneNumber'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -242,6 +248,11 @@ exports.Prisma.OtpOrderByRelevanceFieldEnum = {
   email: 'email',
   otp: 'otp'
 };
+
+exports.Prisma.ContactOrderByRelevanceFieldEnum = {
+  email: 'email',
+  phoneNumber: 'phoneNumber'
+};
 exports.Status = exports.$Enums.Status = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -252,7 +263,8 @@ exports.Prisma.ModelName = {
   Admin: 'Admin',
   PaymentFee: 'PaymentFee',
   LoanApplication: 'LoanApplication',
-  Otp: 'Otp'
+  Otp: 'Otp',
+  Contact: 'Contact'
 };
 
 /**
