@@ -30,6 +30,7 @@ export const handleImageUpload = async (
             url: uploadResult.secure_url
         };
     } catch (error) {
+        console.log({error});
         console.error(`Failed to upload image for ${fieldName}:`, error);
         throw new Error(`Failed to upload ${fieldName} image`);
     }

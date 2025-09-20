@@ -88,6 +88,7 @@ export const getAdminById = asyncHandler(async (req, res, next) => {
 });
 export const adminLogin = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
+    console.log(email, password);
     if (!email || !password) {
         return next(new ErrorResponse("Email and password are required", 400));
     }

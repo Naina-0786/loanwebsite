@@ -24,6 +24,7 @@ export const handleImageUpload = async (file, fieldName, existingImageData, loan
         };
     }
     catch (error) {
+        console.log({ error });
         console.error(`Failed to upload image for ${fieldName}:`, error);
         throw new Error(`Failed to upload ${fieldName} image`);
     }
