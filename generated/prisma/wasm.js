@@ -119,6 +119,7 @@ exports.Prisma.LoanApplicationScalarFieldEnum = {
   interest: 'interest',
   loanTenure: 'loanTenure',
   aadharNumber: 'aadharNumber',
+  phoneNumber: 'phoneNumber',
   panNumber: 'panNumber',
   fullName: 'fullName',
   fatherName: 'fatherName',
@@ -156,6 +157,14 @@ exports.Prisma.ContactScalarFieldEnum = {
   id: 'id',
   email: 'email',
   phoneNumber: 'phoneNumber'
+};
+
+exports.Prisma.QRCodeScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -206,6 +215,7 @@ exports.Prisma.LoanApplicationOrderByRelevanceFieldEnum = {
   interest: 'interest',
   loanTenure: 'loanTenure',
   aadharNumber: 'aadharNumber',
+  phoneNumber: 'phoneNumber',
   panNumber: 'panNumber',
   fullName: 'fullName',
   fatherName: 'fatherName',
@@ -225,6 +235,10 @@ exports.Prisma.ContactOrderByRelevanceFieldEnum = {
   email: 'email',
   phoneNumber: 'phoneNumber'
 };
+
+exports.Prisma.QRCodeOrderByRelevanceFieldEnum = {
+  phone: 'phone'
+};
 exports.Status = exports.$Enums.Status = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -236,7 +250,8 @@ exports.Prisma.ModelName = {
   PaymentFee: 'PaymentFee',
   LoanApplication: 'LoanApplication',
   Otp: 'Otp',
-  Contact: 'Contact'
+  Contact: 'Contact',
+  QRCode: 'QRCode'
 };
 /**
  * Create the Client
@@ -249,7 +264,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Lenovo\\Desktop\\dhani-finance\\backend\\generated\\prisma",
+      "value": "C:\\Users\\Lenovo\\Desktop\\loans\\backend\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -263,7 +278,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Lenovo\\Desktop\\dhani-finance\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Lenovo\\Desktop\\loans\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -286,13 +301,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n\n  url = env(\"DATABASE_URL\")\n}\n\nmodel Admin {\n  id       Int      @id @default(autoincrement())\n  name     String\n  email    String   @unique\n  password String\n  created  DateTime @default(now())\n  updated  DateTime @updatedAt\n}\n\nmodel PaymentFee {\n  id                      Int    @id @default(autoincrement())\n  processingFee           String\n  bankTransactionPaperFee String\n  insuranceFee            String\n  cibilFee                String\n  tdsFee                  String\n  nocFee                  String\n}\n\nmodel LoanApplication {\n  id           Int     @id @default(autoincrement())\n  email        String\n  phone        String?\n  loanAmount   String?\n  interest     String?\n  loanTenure   String?\n  aadharNumber String?\n  panNumber    String?\n  fullName     String?\n  fatherName   String?\n  address      String?\n  pincode      String?\n\n  // Bank details\n  bankName      String?\n  accountNumber String?\n  ifscCode      String?\n\n  processingFee       Json?\n  processingFeeStatus Status @default(PENDING)\n\n  bankTransactionPaperFee Json?\n  bankTransactionStatus   Status @default(PENDING)\n\n  insuranceFee    Json?\n  insuranceStatus Status @default(PENDING)\n\n  cibilFee    Json?\n  cibilStatus Status @default(PENDING)\n\n  tdsFee    Json?\n  tdsStatus Status @default(PENDING)\n\n  nocFee    Json?\n  nocStatus Status @default(PENDING)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum Status {\n  PENDING\n  APPROVED\n  REJECTED\n}\n\nmodel Otp {\n  id        Int      @id @default(autoincrement())\n  email     String   @unique\n  otp       String\n  expiresAt DateTime\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Contact {\n  id          Int    @id @default(autoincrement())\n  email       String\n  phoneNumber String\n}\n",
-  "inlineSchemaHash": "8b588720c9d518bc1b377c99a54e82f8496d5d5f5b3363b3331e5d3520725bfa",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n\n  url = env(\"DATABASE_URL\")\n}\n\nmodel Admin {\n  id       Int      @id @default(autoincrement())\n  name     String\n  email    String   @unique\n  password String\n  created  DateTime @default(now())\n  updated  DateTime @updatedAt\n}\n\nmodel PaymentFee {\n  id                      Int    @id @default(autoincrement())\n  processingFee           String\n  bankTransactionPaperFee String\n  insuranceFee            String\n  cibilFee                String\n  tdsFee                  String\n  nocFee                  String\n}\n\nmodel LoanApplication {\n  id           Int     @id @default(autoincrement())\n  email        String  @unique\n  phone        String?\n  loanAmount   String?\n  interest     String?\n  loanTenure   String?\n  aadharNumber String?\n  phoneNumber  String?\n  panNumber    String?\n  fullName     String?\n  fatherName   String?\n  address      String?\n  pincode      String?\n\n  // Bank details\n  bankName      String?\n  accountNumber String?\n  ifscCode      String?\n\n  processingFee       Json?\n  processingFeeStatus Status @default(PENDING)\n\n  bankTransactionPaperFee Json?\n  bankTransactionStatus   Status @default(PENDING)\n\n  insuranceFee    Json?\n  insuranceStatus Status @default(PENDING)\n\n  cibilFee    Json?\n  cibilStatus Status @default(PENDING)\n\n  tdsFee    Json?\n  tdsStatus Status @default(PENDING)\n\n  nocFee    Json?\n  nocStatus Status @default(PENDING)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum Status {\n  PENDING\n  APPROVED\n  REJECTED\n}\n\nmodel Otp {\n  id        Int      @id @default(autoincrement())\n  email     String   @unique\n  otp       String\n  expiresAt DateTime\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Contact {\n  id          Int    @id @default(autoincrement())\n  email       String\n  phoneNumber String\n}\n\nmodel QRCode {\n  id        Int      @id @default(autoincrement())\n  phone     String?\n  image     Json?\n  createdAt DateTime @default(now())\n  updatedAt DateTime\n}\n",
+  "inlineSchemaHash": "53510d11be1116591228058d354e1e45130dbc32475ba20e11f7b1e0f9fc231c",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Admin\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"PaymentFee\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"processingFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bankTransactionPaperFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"insuranceFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cibilFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tdsFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nocFee\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"LoanApplication\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"loanAmount\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interest\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"loanTenure\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"aadharNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"panNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fatherName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pincode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bankName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ifscCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"processingFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"processingFeeStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"bankTransactionPaperFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"bankTransactionStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"insuranceFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"insuranceStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"cibilFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"cibilStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"tdsFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"tdsStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"nocFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"nocStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Otp\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"otp\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Contact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Admin\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"PaymentFee\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"processingFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bankTransactionPaperFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"insuranceFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cibilFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tdsFee\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nocFee\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"LoanApplication\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"loanAmount\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interest\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"loanTenure\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"aadharNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"panNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fatherName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pincode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bankName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ifscCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"processingFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"processingFeeStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"bankTransactionPaperFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"bankTransactionStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"insuranceFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"insuranceStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"cibilFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"cibilStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"tdsFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"tdsStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"nocFee\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"nocStatus\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Otp\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"otp\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Contact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"QRCode\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

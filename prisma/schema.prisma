@@ -36,12 +36,13 @@ model PaymentFee {
 
 model LoanApplication {
   id           Int     @id @default(autoincrement())
-  email        String
+  email        String @unique
   phone        String?
   loanAmount   String?
   interest     String?
   loanTenure   String?
   aadharNumber String?
+  phoneNumber  String?
   panNumber    String?
   fullName     String?
   fatherName   String?
@@ -95,4 +96,13 @@ model Contact {
   id          Int    @id @default(autoincrement())
   email       String
   phoneNumber String
+}
+
+
+model QRCode {
+  id        Int      @id @default(autoincrement())
+  phone     String?
+  image     Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime
 }

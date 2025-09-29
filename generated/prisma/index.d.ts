@@ -38,6 +38,11 @@ export type Otp = $Result.DefaultSelection<Prisma.$OtpPayload>
  * 
  */
 export type Contact = $Result.DefaultSelection<Prisma.$ContactPayload>
+/**
+ * Model QRCode
+ * 
+ */
+export type QRCode = $Result.DefaultSelection<Prisma.$QRCodePayload>
 
 /**
  * Enums
@@ -224,6 +229,16 @@ export class PrismaClient<
     * ```
     */
   get contact(): Prisma.ContactDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.qRCode`: Exposes CRUD operations for the **QRCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QRCodes
+    * const qRCodes = await prisma.qRCode.findMany()
+    * ```
+    */
+  get qRCode(): Prisma.QRCodeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -668,7 +683,8 @@ export namespace Prisma {
     PaymentFee: 'PaymentFee',
     LoanApplication: 'LoanApplication',
     Otp: 'Otp',
-    Contact: 'Contact'
+    Contact: 'Contact',
+    QRCode: 'QRCode'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -687,7 +703,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "paymentFee" | "loanApplication" | "otp" | "contact"
+      modelProps: "admin" | "paymentFee" | "loanApplication" | "otp" | "contact" | "qRCode"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1021,6 +1037,72 @@ export namespace Prisma {
           }
         }
       }
+      QRCode: {
+        payload: Prisma.$QRCodePayload<ExtArgs>
+        fields: Prisma.QRCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QRCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QRCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>
+          }
+          findFirst: {
+            args: Prisma.QRCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QRCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>
+          }
+          findMany: {
+            args: Prisma.QRCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>[]
+          }
+          create: {
+            args: Prisma.QRCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>
+          }
+          createMany: {
+            args: Prisma.QRCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.QRCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>
+          }
+          update: {
+            args: Prisma.QRCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.QRCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QRCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.QRCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QRCodePayload>
+          }
+          aggregate: {
+            args: Prisma.QRCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQRCode>
+          }
+          groupBy: {
+            args: Prisma.QRCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QRCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QRCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<QRCodeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1122,6 +1204,7 @@ export namespace Prisma {
     loanApplication?: LoanApplicationOmit
     otp?: OtpOmit
     contact?: ContactOmit
+    qRCode?: QRCodeOmit
   }
 
   /* Types for Logging */
@@ -3095,6 +3178,7 @@ export namespace Prisma {
     interest: string | null
     loanTenure: string | null
     aadharNumber: string | null
+    phoneNumber: string | null
     panNumber: string | null
     fullName: string | null
     fatherName: string | null
@@ -3121,6 +3205,7 @@ export namespace Prisma {
     interest: string | null
     loanTenure: string | null
     aadharNumber: string | null
+    phoneNumber: string | null
     panNumber: string | null
     fullName: string | null
     fatherName: string | null
@@ -3147,6 +3232,7 @@ export namespace Prisma {
     interest: number
     loanTenure: number
     aadharNumber: number
+    phoneNumber: number
     panNumber: number
     fullName: number
     fatherName: number
@@ -3189,6 +3275,7 @@ export namespace Prisma {
     interest?: true
     loanTenure?: true
     aadharNumber?: true
+    phoneNumber?: true
     panNumber?: true
     fullName?: true
     fatherName?: true
@@ -3215,6 +3302,7 @@ export namespace Prisma {
     interest?: true
     loanTenure?: true
     aadharNumber?: true
+    phoneNumber?: true
     panNumber?: true
     fullName?: true
     fatherName?: true
@@ -3241,6 +3329,7 @@ export namespace Prisma {
     interest?: true
     loanTenure?: true
     aadharNumber?: true
+    phoneNumber?: true
     panNumber?: true
     fullName?: true
     fatherName?: true
@@ -3360,6 +3449,7 @@ export namespace Prisma {
     interest: string | null
     loanTenure: string | null
     aadharNumber: string | null
+    phoneNumber: string | null
     panNumber: string | null
     fullName: string | null
     fatherName: string | null
@@ -3411,6 +3501,7 @@ export namespace Prisma {
     interest?: boolean
     loanTenure?: boolean
     aadharNumber?: boolean
+    phoneNumber?: boolean
     panNumber?: boolean
     fullName?: boolean
     fatherName?: boolean
@@ -3445,6 +3536,7 @@ export namespace Prisma {
     interest?: boolean
     loanTenure?: boolean
     aadharNumber?: boolean
+    phoneNumber?: boolean
     panNumber?: boolean
     fullName?: boolean
     fatherName?: boolean
@@ -3469,7 +3561,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type LoanApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "phone" | "loanAmount" | "interest" | "loanTenure" | "aadharNumber" | "panNumber" | "fullName" | "fatherName" | "address" | "pincode" | "bankName" | "accountNumber" | "ifscCode" | "processingFee" | "processingFeeStatus" | "bankTransactionPaperFee" | "bankTransactionStatus" | "insuranceFee" | "insuranceStatus" | "cibilFee" | "cibilStatus" | "tdsFee" | "tdsStatus" | "nocFee" | "nocStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["loanApplication"]>
+  export type LoanApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "phone" | "loanAmount" | "interest" | "loanTenure" | "aadharNumber" | "phoneNumber" | "panNumber" | "fullName" | "fatherName" | "address" | "pincode" | "bankName" | "accountNumber" | "ifscCode" | "processingFee" | "processingFeeStatus" | "bankTransactionPaperFee" | "bankTransactionStatus" | "insuranceFee" | "insuranceStatus" | "cibilFee" | "cibilStatus" | "tdsFee" | "tdsStatus" | "nocFee" | "nocStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["loanApplication"]>
 
   export type $LoanApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "LoanApplication"
@@ -3482,6 +3574,7 @@ export namespace Prisma {
       interest: string | null
       loanTenure: string | null
       aadharNumber: string | null
+      phoneNumber: string | null
       panNumber: string | null
       fullName: string | null
       fatherName: string | null
@@ -3880,6 +3973,7 @@ export namespace Prisma {
     readonly interest: FieldRef<"LoanApplication", 'String'>
     readonly loanTenure: FieldRef<"LoanApplication", 'String'>
     readonly aadharNumber: FieldRef<"LoanApplication", 'String'>
+    readonly phoneNumber: FieldRef<"LoanApplication", 'String'>
     readonly panNumber: FieldRef<"LoanApplication", 'String'>
     readonly fullName: FieldRef<"LoanApplication", 'String'>
     readonly fatherName: FieldRef<"LoanApplication", 'String'>
@@ -6045,6 +6139,918 @@ export namespace Prisma {
 
 
   /**
+   * Model QRCode
+   */
+
+  export type AggregateQRCode = {
+    _count: QRCodeCountAggregateOutputType | null
+    _avg: QRCodeAvgAggregateOutputType | null
+    _sum: QRCodeSumAggregateOutputType | null
+    _min: QRCodeMinAggregateOutputType | null
+    _max: QRCodeMaxAggregateOutputType | null
+  }
+
+  export type QRCodeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type QRCodeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type QRCodeMinAggregateOutputType = {
+    id: number | null
+    phone: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QRCodeMaxAggregateOutputType = {
+    id: number | null
+    phone: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QRCodeCountAggregateOutputType = {
+    id: number
+    phone: number
+    image: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type QRCodeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type QRCodeSumAggregateInputType = {
+    id?: true
+  }
+
+  export type QRCodeMinAggregateInputType = {
+    id?: true
+    phone?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QRCodeMaxAggregateInputType = {
+    id?: true
+    phone?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QRCodeCountAggregateInputType = {
+    id?: true
+    phone?: true
+    image?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type QRCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QRCode to aggregate.
+     */
+    where?: QRCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QRCodes to fetch.
+     */
+    orderBy?: QRCodeOrderByWithRelationInput | QRCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QRCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QRCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QRCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QRCodes
+    **/
+    _count?: true | QRCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QRCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QRCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QRCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QRCodeMaxAggregateInputType
+  }
+
+  export type GetQRCodeAggregateType<T extends QRCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateQRCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQRCode[P]>
+      : GetScalarType<T[P], AggregateQRCode[P]>
+  }
+
+
+
+
+  export type QRCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QRCodeWhereInput
+    orderBy?: QRCodeOrderByWithAggregationInput | QRCodeOrderByWithAggregationInput[]
+    by: QRCodeScalarFieldEnum[] | QRCodeScalarFieldEnum
+    having?: QRCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QRCodeCountAggregateInputType | true
+    _avg?: QRCodeAvgAggregateInputType
+    _sum?: QRCodeSumAggregateInputType
+    _min?: QRCodeMinAggregateInputType
+    _max?: QRCodeMaxAggregateInputType
+  }
+
+  export type QRCodeGroupByOutputType = {
+    id: number
+    phone: string | null
+    image: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: QRCodeCountAggregateOutputType | null
+    _avg: QRCodeAvgAggregateOutputType | null
+    _sum: QRCodeSumAggregateOutputType | null
+    _min: QRCodeMinAggregateOutputType | null
+    _max: QRCodeMaxAggregateOutputType | null
+  }
+
+  type GetQRCodeGroupByPayload<T extends QRCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QRCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QRCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QRCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], QRCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QRCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    phone?: boolean
+    image?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["qRCode"]>
+
+
+
+  export type QRCodeSelectScalar = {
+    id?: boolean
+    phone?: boolean
+    image?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type QRCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "phone" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["qRCode"]>
+
+  export type $QRCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QRCode"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      phone: string | null
+      image: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["qRCode"]>
+    composites: {}
+  }
+
+  type QRCodeGetPayload<S extends boolean | null | undefined | QRCodeDefaultArgs> = $Result.GetResult<Prisma.$QRCodePayload, S>
+
+  type QRCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QRCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QRCodeCountAggregateInputType | true
+    }
+
+  export interface QRCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QRCode'], meta: { name: 'QRCode' } }
+    /**
+     * Find zero or one QRCode that matches the filter.
+     * @param {QRCodeFindUniqueArgs} args - Arguments to find a QRCode
+     * @example
+     * // Get one QRCode
+     * const qRCode = await prisma.qRCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QRCodeFindUniqueArgs>(args: SelectSubset<T, QRCodeFindUniqueArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QRCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QRCodeFindUniqueOrThrowArgs} args - Arguments to find a QRCode
+     * @example
+     * // Get one QRCode
+     * const qRCode = await prisma.qRCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QRCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, QRCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QRCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeFindFirstArgs} args - Arguments to find a QRCode
+     * @example
+     * // Get one QRCode
+     * const qRCode = await prisma.qRCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QRCodeFindFirstArgs>(args?: SelectSubset<T, QRCodeFindFirstArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QRCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeFindFirstOrThrowArgs} args - Arguments to find a QRCode
+     * @example
+     * // Get one QRCode
+     * const qRCode = await prisma.qRCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QRCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, QRCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QRCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QRCodes
+     * const qRCodes = await prisma.qRCode.findMany()
+     * 
+     * // Get first 10 QRCodes
+     * const qRCodes = await prisma.qRCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const qRCodeWithIdOnly = await prisma.qRCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QRCodeFindManyArgs>(args?: SelectSubset<T, QRCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QRCode.
+     * @param {QRCodeCreateArgs} args - Arguments to create a QRCode.
+     * @example
+     * // Create one QRCode
+     * const QRCode = await prisma.qRCode.create({
+     *   data: {
+     *     // ... data to create a QRCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends QRCodeCreateArgs>(args: SelectSubset<T, QRCodeCreateArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QRCodes.
+     * @param {QRCodeCreateManyArgs} args - Arguments to create many QRCodes.
+     * @example
+     * // Create many QRCodes
+     * const qRCode = await prisma.qRCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QRCodeCreateManyArgs>(args?: SelectSubset<T, QRCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a QRCode.
+     * @param {QRCodeDeleteArgs} args - Arguments to delete one QRCode.
+     * @example
+     * // Delete one QRCode
+     * const QRCode = await prisma.qRCode.delete({
+     *   where: {
+     *     // ... filter to delete one QRCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QRCodeDeleteArgs>(args: SelectSubset<T, QRCodeDeleteArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QRCode.
+     * @param {QRCodeUpdateArgs} args - Arguments to update one QRCode.
+     * @example
+     * // Update one QRCode
+     * const qRCode = await prisma.qRCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QRCodeUpdateArgs>(args: SelectSubset<T, QRCodeUpdateArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QRCodes.
+     * @param {QRCodeDeleteManyArgs} args - Arguments to filter QRCodes to delete.
+     * @example
+     * // Delete a few QRCodes
+     * const { count } = await prisma.qRCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QRCodeDeleteManyArgs>(args?: SelectSubset<T, QRCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QRCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QRCodes
+     * const qRCode = await prisma.qRCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QRCodeUpdateManyArgs>(args: SelectSubset<T, QRCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one QRCode.
+     * @param {QRCodeUpsertArgs} args - Arguments to update or create a QRCode.
+     * @example
+     * // Update or create a QRCode
+     * const qRCode = await prisma.qRCode.upsert({
+     *   create: {
+     *     // ... data to create a QRCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QRCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QRCodeUpsertArgs>(args: SelectSubset<T, QRCodeUpsertArgs<ExtArgs>>): Prisma__QRCodeClient<$Result.GetResult<Prisma.$QRCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QRCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeCountArgs} args - Arguments to filter QRCodes to count.
+     * @example
+     * // Count the number of QRCodes
+     * const count = await prisma.qRCode.count({
+     *   where: {
+     *     // ... the filter for the QRCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends QRCodeCountArgs>(
+      args?: Subset<T, QRCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QRCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QRCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QRCodeAggregateArgs>(args: Subset<T, QRCodeAggregateArgs>): Prisma.PrismaPromise<GetQRCodeAggregateType<T>>
+
+    /**
+     * Group by QRCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QRCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QRCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QRCodeGroupByArgs['orderBy'] }
+        : { orderBy?: QRCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QRCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQRCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QRCode model
+   */
+  readonly fields: QRCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QRCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QRCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QRCode model
+   */
+  interface QRCodeFieldRefs {
+    readonly id: FieldRef<"QRCode", 'Int'>
+    readonly phone: FieldRef<"QRCode", 'String'>
+    readonly image: FieldRef<"QRCode", 'Json'>
+    readonly createdAt: FieldRef<"QRCode", 'DateTime'>
+    readonly updatedAt: FieldRef<"QRCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QRCode findUnique
+   */
+  export type QRCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * Filter, which QRCode to fetch.
+     */
+    where: QRCodeWhereUniqueInput
+  }
+
+  /**
+   * QRCode findUniqueOrThrow
+   */
+  export type QRCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * Filter, which QRCode to fetch.
+     */
+    where: QRCodeWhereUniqueInput
+  }
+
+  /**
+   * QRCode findFirst
+   */
+  export type QRCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * Filter, which QRCode to fetch.
+     */
+    where?: QRCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QRCodes to fetch.
+     */
+    orderBy?: QRCodeOrderByWithRelationInput | QRCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QRCodes.
+     */
+    cursor?: QRCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QRCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QRCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QRCodes.
+     */
+    distinct?: QRCodeScalarFieldEnum | QRCodeScalarFieldEnum[]
+  }
+
+  /**
+   * QRCode findFirstOrThrow
+   */
+  export type QRCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * Filter, which QRCode to fetch.
+     */
+    where?: QRCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QRCodes to fetch.
+     */
+    orderBy?: QRCodeOrderByWithRelationInput | QRCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QRCodes.
+     */
+    cursor?: QRCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QRCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QRCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QRCodes.
+     */
+    distinct?: QRCodeScalarFieldEnum | QRCodeScalarFieldEnum[]
+  }
+
+  /**
+   * QRCode findMany
+   */
+  export type QRCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * Filter, which QRCodes to fetch.
+     */
+    where?: QRCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QRCodes to fetch.
+     */
+    orderBy?: QRCodeOrderByWithRelationInput | QRCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QRCodes.
+     */
+    cursor?: QRCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QRCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QRCodes.
+     */
+    skip?: number
+    distinct?: QRCodeScalarFieldEnum | QRCodeScalarFieldEnum[]
+  }
+
+  /**
+   * QRCode create
+   */
+  export type QRCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * The data needed to create a QRCode.
+     */
+    data: XOR<QRCodeCreateInput, QRCodeUncheckedCreateInput>
+  }
+
+  /**
+   * QRCode createMany
+   */
+  export type QRCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QRCodes.
+     */
+    data: QRCodeCreateManyInput | QRCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QRCode update
+   */
+  export type QRCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * The data needed to update a QRCode.
+     */
+    data: XOR<QRCodeUpdateInput, QRCodeUncheckedUpdateInput>
+    /**
+     * Choose, which QRCode to update.
+     */
+    where: QRCodeWhereUniqueInput
+  }
+
+  /**
+   * QRCode updateMany
+   */
+  export type QRCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QRCodes.
+     */
+    data: XOR<QRCodeUpdateManyMutationInput, QRCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which QRCodes to update
+     */
+    where?: QRCodeWhereInput
+    /**
+     * Limit how many QRCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QRCode upsert
+   */
+  export type QRCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * The filter to search for the QRCode to update in case it exists.
+     */
+    where: QRCodeWhereUniqueInput
+    /**
+     * In case the QRCode found by the `where` argument doesn't exist, create a new QRCode with this data.
+     */
+    create: XOR<QRCodeCreateInput, QRCodeUncheckedCreateInput>
+    /**
+     * In case the QRCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QRCodeUpdateInput, QRCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * QRCode delete
+   */
+  export type QRCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+    /**
+     * Filter which QRCode to delete.
+     */
+    where: QRCodeWhereUniqueInput
+  }
+
+  /**
+   * QRCode deleteMany
+   */
+  export type QRCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QRCodes to delete
+     */
+    where?: QRCodeWhereInput
+    /**
+     * Limit how many QRCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QRCode without action
+   */
+  export type QRCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QRCode
+     */
+    select?: QRCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QRCode
+     */
+    omit?: QRCodeOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6091,6 +7097,7 @@ export namespace Prisma {
     interest: 'interest',
     loanTenure: 'loanTenure',
     aadharNumber: 'aadharNumber',
+    phoneNumber: 'phoneNumber',
     panNumber: 'panNumber',
     fullName: 'fullName',
     fatherName: 'fatherName',
@@ -6137,6 +7144,17 @@ export namespace Prisma {
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+  export const QRCodeScalarFieldEnum: {
+    id: 'id',
+    phone: 'phone',
+    image: 'image',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type QRCodeScalarFieldEnum = (typeof QRCodeScalarFieldEnum)[keyof typeof QRCodeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6208,6 +7226,7 @@ export namespace Prisma {
     interest: 'interest',
     loanTenure: 'loanTenure',
     aadharNumber: 'aadharNumber',
+    phoneNumber: 'phoneNumber',
     panNumber: 'panNumber',
     fullName: 'fullName',
     fatherName: 'fatherName',
@@ -6235,6 +7254,13 @@ export namespace Prisma {
   };
 
   export type ContactOrderByRelevanceFieldEnum = (typeof ContactOrderByRelevanceFieldEnum)[keyof typeof ContactOrderByRelevanceFieldEnum]
+
+
+  export const QRCodeOrderByRelevanceFieldEnum: {
+    phone: 'phone'
+  };
+
+  export type QRCodeOrderByRelevanceFieldEnum = (typeof QRCodeOrderByRelevanceFieldEnum)[keyof typeof QRCodeOrderByRelevanceFieldEnum]
 
 
   /**
@@ -6430,6 +7456,7 @@ export namespace Prisma {
     interest?: StringNullableFilter<"LoanApplication"> | string | null
     loanTenure?: StringNullableFilter<"LoanApplication"> | string | null
     aadharNumber?: StringNullableFilter<"LoanApplication"> | string | null
+    phoneNumber?: StringNullableFilter<"LoanApplication"> | string | null
     panNumber?: StringNullableFilter<"LoanApplication"> | string | null
     fullName?: StringNullableFilter<"LoanApplication"> | string | null
     fatherName?: StringNullableFilter<"LoanApplication"> | string | null
@@ -6462,6 +7489,7 @@ export namespace Prisma {
     interest?: SortOrderInput | SortOrder
     loanTenure?: SortOrderInput | SortOrder
     aadharNumber?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
     panNumber?: SortOrderInput | SortOrder
     fullName?: SortOrderInput | SortOrder
     fatherName?: SortOrderInput | SortOrder
@@ -6489,15 +7517,16 @@ export namespace Prisma {
 
   export type LoanApplicationWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    email?: string
     AND?: LoanApplicationWhereInput | LoanApplicationWhereInput[]
     OR?: LoanApplicationWhereInput[]
     NOT?: LoanApplicationWhereInput | LoanApplicationWhereInput[]
-    email?: StringFilter<"LoanApplication"> | string
     phone?: StringNullableFilter<"LoanApplication"> | string | null
     loanAmount?: StringNullableFilter<"LoanApplication"> | string | null
     interest?: StringNullableFilter<"LoanApplication"> | string | null
     loanTenure?: StringNullableFilter<"LoanApplication"> | string | null
     aadharNumber?: StringNullableFilter<"LoanApplication"> | string | null
+    phoneNumber?: StringNullableFilter<"LoanApplication"> | string | null
     panNumber?: StringNullableFilter<"LoanApplication"> | string | null
     fullName?: StringNullableFilter<"LoanApplication"> | string | null
     fatherName?: StringNullableFilter<"LoanApplication"> | string | null
@@ -6520,7 +7549,7 @@ export namespace Prisma {
     nocStatus?: EnumStatusFilter<"LoanApplication"> | $Enums.Status
     createdAt?: DateTimeFilter<"LoanApplication"> | Date | string
     updatedAt?: DateTimeFilter<"LoanApplication"> | Date | string
-  }, "id">
+  }, "id" | "email">
 
   export type LoanApplicationOrderByWithAggregationInput = {
     id?: SortOrder
@@ -6530,6 +7559,7 @@ export namespace Prisma {
     interest?: SortOrderInput | SortOrder
     loanTenure?: SortOrderInput | SortOrder
     aadharNumber?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
     panNumber?: SortOrderInput | SortOrder
     fullName?: SortOrderInput | SortOrder
     fatherName?: SortOrderInput | SortOrder
@@ -6570,6 +7600,7 @@ export namespace Prisma {
     interest?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
     loanTenure?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
     aadharNumber?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
+    phoneNumber?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
     panNumber?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
     fullName?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
     fatherName?: StringNullableWithAggregatesFilter<"LoanApplication"> | string | null
@@ -6697,6 +7728,61 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Contact"> | number
     email?: StringWithAggregatesFilter<"Contact"> | string
     phoneNumber?: StringWithAggregatesFilter<"Contact"> | string
+  }
+
+  export type QRCodeWhereInput = {
+    AND?: QRCodeWhereInput | QRCodeWhereInput[]
+    OR?: QRCodeWhereInput[]
+    NOT?: QRCodeWhereInput | QRCodeWhereInput[]
+    id?: IntFilter<"QRCode"> | number
+    phone?: StringNullableFilter<"QRCode"> | string | null
+    image?: JsonNullableFilter<"QRCode">
+    createdAt?: DateTimeFilter<"QRCode"> | Date | string
+    updatedAt?: DateTimeFilter<"QRCode"> | Date | string
+  }
+
+  export type QRCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: QRCodeOrderByRelevanceInput
+  }
+
+  export type QRCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: QRCodeWhereInput | QRCodeWhereInput[]
+    OR?: QRCodeWhereInput[]
+    NOT?: QRCodeWhereInput | QRCodeWhereInput[]
+    phone?: StringNullableFilter<"QRCode"> | string | null
+    image?: JsonNullableFilter<"QRCode">
+    createdAt?: DateTimeFilter<"QRCode"> | Date | string
+    updatedAt?: DateTimeFilter<"QRCode"> | Date | string
+  }, "id">
+
+  export type QRCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: QRCodeCountOrderByAggregateInput
+    _avg?: QRCodeAvgOrderByAggregateInput
+    _max?: QRCodeMaxOrderByAggregateInput
+    _min?: QRCodeMinOrderByAggregateInput
+    _sum?: QRCodeSumOrderByAggregateInput
+  }
+
+  export type QRCodeScalarWhereWithAggregatesInput = {
+    AND?: QRCodeScalarWhereWithAggregatesInput | QRCodeScalarWhereWithAggregatesInput[]
+    OR?: QRCodeScalarWhereWithAggregatesInput[]
+    NOT?: QRCodeScalarWhereWithAggregatesInput | QRCodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"QRCode"> | number
+    phone?: StringNullableWithAggregatesFilter<"QRCode"> | string | null
+    image?: JsonNullableWithAggregatesFilter<"QRCode">
+    createdAt?: DateTimeWithAggregatesFilter<"QRCode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"QRCode"> | Date | string
   }
 
   export type AdminCreateInput = {
@@ -6833,6 +7919,7 @@ export namespace Prisma {
     interest?: string | null
     loanTenure?: string | null
     aadharNumber?: string | null
+    phoneNumber?: string | null
     panNumber?: string | null
     fullName?: string | null
     fatherName?: string | null
@@ -6865,6 +7952,7 @@ export namespace Prisma {
     interest?: string | null
     loanTenure?: string | null
     aadharNumber?: string | null
+    phoneNumber?: string | null
     panNumber?: string | null
     fullName?: string | null
     fatherName?: string | null
@@ -6896,6 +7984,7 @@ export namespace Prisma {
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     loanTenure?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     fatherName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6928,6 +8017,7 @@ export namespace Prisma {
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     loanTenure?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     fatherName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6960,6 +8050,7 @@ export namespace Prisma {
     interest?: string | null
     loanTenure?: string | null
     aadharNumber?: string | null
+    phoneNumber?: string | null
     panNumber?: string | null
     fullName?: string | null
     fatherName?: string | null
@@ -6991,6 +8082,7 @@ export namespace Prisma {
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     loanTenure?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     fatherName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7023,6 +8115,7 @@ export namespace Prisma {
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     loanTenure?: NullableStringFieldUpdateOperationsInput | string | null
     aadharNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     panNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     fatherName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7144,6 +8237,59 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type QRCodeCreateInput = {
+    phone?: string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt: Date | string
+  }
+
+  export type QRCodeUncheckedCreateInput = {
+    id?: number
+    phone?: string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt: Date | string
+  }
+
+  export type QRCodeUpdateInput = {
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QRCodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QRCodeCreateManyInput = {
+    id?: number
+    phone?: string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt: Date | string
+  }
+
+  export type QRCodeUpdateManyMutationInput = {
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QRCodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7380,6 +8526,7 @@ export namespace Prisma {
     interest?: SortOrder
     loanTenure?: SortOrder
     aadharNumber?: SortOrder
+    phoneNumber?: SortOrder
     panNumber?: SortOrder
     fullName?: SortOrder
     fatherName?: SortOrder
@@ -7416,6 +8563,7 @@ export namespace Prisma {
     interest?: SortOrder
     loanTenure?: SortOrder
     aadharNumber?: SortOrder
+    phoneNumber?: SortOrder
     panNumber?: SortOrder
     fullName?: SortOrder
     fatherName?: SortOrder
@@ -7442,6 +8590,7 @@ export namespace Prisma {
     interest?: SortOrder
     loanTenure?: SortOrder
     aadharNumber?: SortOrder
+    phoneNumber?: SortOrder
     panNumber?: SortOrder
     fullName?: SortOrder
     fatherName?: SortOrder
@@ -7588,6 +8737,42 @@ export namespace Prisma {
   }
 
   export type ContactSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type QRCodeOrderByRelevanceInput = {
+    fields: QRCodeOrderByRelevanceFieldEnum | QRCodeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type QRCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    phone?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QRCodeAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type QRCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    phone?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QRCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    phone?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QRCodeSumOrderByAggregateInput = {
     id?: SortOrder
   }
 

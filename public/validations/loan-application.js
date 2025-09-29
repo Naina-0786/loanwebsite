@@ -25,7 +25,7 @@ export const loanValidation = z.object({
 export const updateLoanApplicationSchema = z.object({
     // Personal information updates
     email: z.string().email().optional(),
-    phone: z.string().min(10).optional(),
+    phoneNumber: z.string().min(10).optional(),
     loanAmount: z.string().optional(),
     interest: z.string().optional(),
     loanTenure: z.union([z.string(), z.number()]).optional(),

@@ -19,7 +19,7 @@ export declare const loanValidation: z.ZodObject<{
 }, z.core.$strip>;
 export declare const updateLoanApplicationSchema: z.ZodObject<{
     email: z.ZodOptional<z.ZodString>;
-    phone: z.ZodOptional<z.ZodString>;
+    phoneNumber: z.ZodOptional<z.ZodString>;
     loanAmount: z.ZodOptional<z.ZodString>;
     interest: z.ZodOptional<z.ZodString>;
     loanTenure: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodNumber]>>;

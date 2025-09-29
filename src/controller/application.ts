@@ -72,6 +72,8 @@ export const createPaymentFee = asyncHandler(async (req, res, next) => {
         const paymentFee = await prisma.paymentFee.findFirst({
             orderBy: { id: 'desc' }
         });
+
+        console.log({paymentFee});
         
         if (!paymentFee) {
             return next(new ErrorResponse("Payment fee configuration not found", 404));
@@ -82,7 +84,7 @@ export const createPaymentFee = asyncHandler(async (req, res, next) => {
 
     export const updatePaymentFeeConfig = asyncHandler(async (req, res, next) => {
         const id = Number(req.params.id);
-        if (!id) return next(new ErrorResponse("ID is required", 400));
+        if (!id) return next(new ErrorResponse("ID is requiredddd", 400));
         
         const data = paymentSchema.parse(req.body);
         

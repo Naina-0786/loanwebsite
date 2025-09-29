@@ -147,6 +147,7 @@ exports.Prisma.LoanApplicationScalarFieldEnum = {
   interest: 'interest',
   loanTenure: 'loanTenure',
   aadharNumber: 'aadharNumber',
+  phoneNumber: 'phoneNumber',
   panNumber: 'panNumber',
   fullName: 'fullName',
   fatherName: 'fatherName',
@@ -184,6 +185,14 @@ exports.Prisma.ContactScalarFieldEnum = {
   id: 'id',
   email: 'email',
   phoneNumber: 'phoneNumber'
+};
+
+exports.Prisma.QRCodeScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -234,6 +243,7 @@ exports.Prisma.LoanApplicationOrderByRelevanceFieldEnum = {
   interest: 'interest',
   loanTenure: 'loanTenure',
   aadharNumber: 'aadharNumber',
+  phoneNumber: 'phoneNumber',
   panNumber: 'panNumber',
   fullName: 'fullName',
   fatherName: 'fatherName',
@@ -253,6 +263,10 @@ exports.Prisma.ContactOrderByRelevanceFieldEnum = {
   email: 'email',
   phoneNumber: 'phoneNumber'
 };
+
+exports.Prisma.QRCodeOrderByRelevanceFieldEnum = {
+  phone: 'phone'
+};
 exports.Status = exports.$Enums.Status = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -264,7 +278,8 @@ exports.Prisma.ModelName = {
   PaymentFee: 'PaymentFee',
   LoanApplication: 'LoanApplication',
   Otp: 'Otp',
-  Contact: 'Contact'
+  Contact: 'Contact',
+  QRCode: 'QRCode'
 };
 
 /**

@@ -133,7 +133,7 @@ export const deleteAdmin = asyncHandler(async (req, res, next) => {
 export const updateAdmin = asyncHandler(async (req, res, next) => {
     const id = Number(req.params.id);
     if (!id)
-        return next(new ErrorResponse("ID is required", 400));
+        return next(new ErrorResponse("ID is requiredd", 400));
     // Use partial schema for update (fields optional)
     const partialSchema = adminSchema.partial();
     const data = partialSchema.parse(req.body);

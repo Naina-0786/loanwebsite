@@ -10,10 +10,10 @@ export const requestOtp = asyncHandler(async (req, res, next) => {
   console.log("payload", req.body);
 
   // 🔹 If email is test@example.com, always send OTP = 123456
-  const otp = validData.email === "test@example.com" ? "123456" : generateOtp();
+  const otp = validData.email === "test@example.com" ? "1234" : generateOtp();
   const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
-  const existingOtp = await prisma.otp.findFirst({
+  const existingOtp = await prisma.otp.findUnique({
     where: { email: validData.email },
   });
   if (existingOtp) {
@@ -53,9 +53,15 @@ export const verifyOtp = asyncHandler(async (req, res) => {
 
   await prisma.otp.delete({ where: { id: storedOtp.id } });
 
-  const loanApplication = await prisma.loanApplication.create({
-    data: { email: validData.email },
+  let loanApplication = await prisma.loanApplication.findUnique({
+    where: { email: validData.email },
   });
+
+  if (!loanApplication) {
+      loanApplication = await prisma.loanApplication.create({
+      data: { email: validData.email },
+    });   
+  } 
 
   return SuccessResponse(
     res,
