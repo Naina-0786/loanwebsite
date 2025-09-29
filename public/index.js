@@ -90,7 +90,7 @@ app.get("/api/admin/:id", getAdminById);
 // ================================
 // QR ROUTES
 // ================================
-app.use("/api/v1/qr", adminAuth, QrRoute);
+app.use("/api/v1/qr", QrRoute);
 // ================================
 // ERROR HANDLER
 // ================================
