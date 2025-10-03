@@ -43,6 +43,11 @@ export type Contact = $Result.DefaultSelection<Prisma.$ContactPayload>
  * 
  */
 export type QRCode = $Result.DefaultSelection<Prisma.$QRCodePayload>
+/**
+ * Model accountNumber
+ * 
+ */
+export type accountNumber = $Result.DefaultSelection<Prisma.$accountNumberPayload>
 
 /**
  * Enums
@@ -239,6 +244,16 @@ export class PrismaClient<
     * ```
     */
   get qRCode(): Prisma.QRCodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.accountNumber`: Exposes CRUD operations for the **accountNumber** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AccountNumbers
+    * const accountNumbers = await prisma.accountNumber.findMany()
+    * ```
+    */
+  get accountNumber(): Prisma.accountNumberDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -684,7 +699,8 @@ export namespace Prisma {
     LoanApplication: 'LoanApplication',
     Otp: 'Otp',
     Contact: 'Contact',
-    QRCode: 'QRCode'
+    QRCode: 'QRCode',
+    accountNumber: 'accountNumber'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -703,7 +719,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "paymentFee" | "loanApplication" | "otp" | "contact" | "qRCode"
+      modelProps: "admin" | "paymentFee" | "loanApplication" | "otp" | "contact" | "qRCode" | "accountNumber"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1103,6 +1119,72 @@ export namespace Prisma {
           }
         }
       }
+      accountNumber: {
+        payload: Prisma.$accountNumberPayload<ExtArgs>
+        fields: Prisma.accountNumberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.accountNumberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.accountNumberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>
+          }
+          findFirst: {
+            args: Prisma.accountNumberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.accountNumberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>
+          }
+          findMany: {
+            args: Prisma.accountNumberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>[]
+          }
+          create: {
+            args: Prisma.accountNumberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>
+          }
+          createMany: {
+            args: Prisma.accountNumberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.accountNumberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>
+          }
+          update: {
+            args: Prisma.accountNumberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>
+          }
+          deleteMany: {
+            args: Prisma.accountNumberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.accountNumberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.accountNumberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$accountNumberPayload>
+          }
+          aggregate: {
+            args: Prisma.AccountNumberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccountNumber>
+          }
+          groupBy: {
+            args: Prisma.accountNumberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccountNumberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.accountNumberCountArgs<ExtArgs>
+            result: $Utils.Optional<AccountNumberCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1205,6 +1287,7 @@ export namespace Prisma {
     otp?: OtpOmit
     contact?: ContactOmit
     qRCode?: QRCodeOmit
+    accountNumber?: accountNumberOmit
   }
 
   /* Types for Logging */
@@ -7051,6 +7134,933 @@ export namespace Prisma {
 
 
   /**
+   * Model accountNumber
+   */
+
+  export type AggregateAccountNumber = {
+    _count: AccountNumberCountAggregateOutputType | null
+    _avg: AccountNumberAvgAggregateOutputType | null
+    _sum: AccountNumberSumAggregateOutputType | null
+    _min: AccountNumberMinAggregateOutputType | null
+    _max: AccountNumberMaxAggregateOutputType | null
+  }
+
+  export type AccountNumberAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AccountNumberSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AccountNumberMinAggregateOutputType = {
+    id: number | null
+    accountNumber: string | null
+    bankName: string | null
+    ifscCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AccountNumberMaxAggregateOutputType = {
+    id: number | null
+    accountNumber: string | null
+    bankName: string | null
+    ifscCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AccountNumberCountAggregateOutputType = {
+    id: number
+    accountNumber: number
+    bankName: number
+    ifscCode: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AccountNumberAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AccountNumberSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AccountNumberMinAggregateInputType = {
+    id?: true
+    accountNumber?: true
+    bankName?: true
+    ifscCode?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AccountNumberMaxAggregateInputType = {
+    id?: true
+    accountNumber?: true
+    bankName?: true
+    ifscCode?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AccountNumberCountAggregateInputType = {
+    id?: true
+    accountNumber?: true
+    bankName?: true
+    ifscCode?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AccountNumberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which accountNumber to aggregate.
+     */
+    where?: accountNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of accountNumbers to fetch.
+     */
+    orderBy?: accountNumberOrderByWithRelationInput | accountNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: accountNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` accountNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` accountNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned accountNumbers
+    **/
+    _count?: true | AccountNumberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AccountNumberAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccountNumberSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccountNumberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccountNumberMaxAggregateInputType
+  }
+
+  export type GetAccountNumberAggregateType<T extends AccountNumberAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccountNumber]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccountNumber[P]>
+      : GetScalarType<T[P], AggregateAccountNumber[P]>
+  }
+
+
+
+
+  export type accountNumberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: accountNumberWhereInput
+    orderBy?: accountNumberOrderByWithAggregationInput | accountNumberOrderByWithAggregationInput[]
+    by: AccountNumberScalarFieldEnum[] | AccountNumberScalarFieldEnum
+    having?: accountNumberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccountNumberCountAggregateInputType | true
+    _avg?: AccountNumberAvgAggregateInputType
+    _sum?: AccountNumberSumAggregateInputType
+    _min?: AccountNumberMinAggregateInputType
+    _max?: AccountNumberMaxAggregateInputType
+  }
+
+  export type AccountNumberGroupByOutputType = {
+    id: number
+    accountNumber: string
+    bankName: string
+    ifscCode: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AccountNumberCountAggregateOutputType | null
+    _avg: AccountNumberAvgAggregateOutputType | null
+    _sum: AccountNumberSumAggregateOutputType | null
+    _min: AccountNumberMinAggregateOutputType | null
+    _max: AccountNumberMaxAggregateOutputType | null
+  }
+
+  type GetAccountNumberGroupByPayload<T extends accountNumberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccountNumberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccountNumberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccountNumberGroupByOutputType[P]>
+            : GetScalarType<T[P], AccountNumberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type accountNumberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accountNumber?: boolean
+    bankName?: boolean
+    ifscCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accountNumber"]>
+
+
+
+  export type accountNumberSelectScalar = {
+    id?: boolean
+    accountNumber?: boolean
+    bankName?: boolean
+    ifscCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type accountNumberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountNumber" | "bankName" | "ifscCode" | "createdAt" | "updatedAt", ExtArgs["result"]["accountNumber"]>
+
+  export type $accountNumberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "accountNumber"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      accountNumber: string
+      bankName: string
+      ifscCode: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["accountNumber"]>
+    composites: {}
+  }
+
+  type accountNumberGetPayload<S extends boolean | null | undefined | accountNumberDefaultArgs> = $Result.GetResult<Prisma.$accountNumberPayload, S>
+
+  type accountNumberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<accountNumberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AccountNumberCountAggregateInputType | true
+    }
+
+  export interface accountNumberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['accountNumber'], meta: { name: 'accountNumber' } }
+    /**
+     * Find zero or one AccountNumber that matches the filter.
+     * @param {accountNumberFindUniqueArgs} args - Arguments to find a AccountNumber
+     * @example
+     * // Get one AccountNumber
+     * const accountNumber = await prisma.accountNumber.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends accountNumberFindUniqueArgs>(args: SelectSubset<T, accountNumberFindUniqueArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AccountNumber that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {accountNumberFindUniqueOrThrowArgs} args - Arguments to find a AccountNumber
+     * @example
+     * // Get one AccountNumber
+     * const accountNumber = await prisma.accountNumber.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends accountNumberFindUniqueOrThrowArgs>(args: SelectSubset<T, accountNumberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccountNumber that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {accountNumberFindFirstArgs} args - Arguments to find a AccountNumber
+     * @example
+     * // Get one AccountNumber
+     * const accountNumber = await prisma.accountNumber.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends accountNumberFindFirstArgs>(args?: SelectSubset<T, accountNumberFindFirstArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccountNumber that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {accountNumberFindFirstOrThrowArgs} args - Arguments to find a AccountNumber
+     * @example
+     * // Get one AccountNumber
+     * const accountNumber = await prisma.accountNumber.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends accountNumberFindFirstOrThrowArgs>(args?: SelectSubset<T, accountNumberFindFirstOrThrowArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AccountNumbers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {accountNumberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AccountNumbers
+     * const accountNumbers = await prisma.accountNumber.findMany()
+     * 
+     * // Get first 10 AccountNumbers
+     * const accountNumbers = await prisma.accountNumber.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accountNumberWithIdOnly = await prisma.accountNumber.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends accountNumberFindManyArgs>(args?: SelectSubset<T, accountNumberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AccountNumber.
+     * @param {accountNumberCreateArgs} args - Arguments to create a AccountNumber.
+     * @example
+     * // Create one AccountNumber
+     * const AccountNumber = await prisma.accountNumber.create({
+     *   data: {
+     *     // ... data to create a AccountNumber
+     *   }
+     * })
+     * 
+     */
+    create<T extends accountNumberCreateArgs>(args: SelectSubset<T, accountNumberCreateArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AccountNumbers.
+     * @param {accountNumberCreateManyArgs} args - Arguments to create many AccountNumbers.
+     * @example
+     * // Create many AccountNumbers
+     * const accountNumber = await prisma.accountNumber.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends accountNumberCreateManyArgs>(args?: SelectSubset<T, accountNumberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a AccountNumber.
+     * @param {accountNumberDeleteArgs} args - Arguments to delete one AccountNumber.
+     * @example
+     * // Delete one AccountNumber
+     * const AccountNumber = await prisma.accountNumber.delete({
+     *   where: {
+     *     // ... filter to delete one AccountNumber
+     *   }
+     * })
+     * 
+     */
+    delete<T extends accountNumberDeleteArgs>(args: SelectSubset<T, accountNumberDeleteArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AccountNumber.
+     * @param {accountNumberUpdateArgs} args - Arguments to update one AccountNumber.
+     * @example
+     * // Update one AccountNumber
+     * const accountNumber = await prisma.accountNumber.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends accountNumberUpdateArgs>(args: SelectSubset<T, accountNumberUpdateArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AccountNumbers.
+     * @param {accountNumberDeleteManyArgs} args - Arguments to filter AccountNumbers to delete.
+     * @example
+     * // Delete a few AccountNumbers
+     * const { count } = await prisma.accountNumber.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends accountNumberDeleteManyArgs>(args?: SelectSubset<T, accountNumberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccountNumbers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {accountNumberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AccountNumbers
+     * const accountNumber = await prisma.accountNumber.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends accountNumberUpdateManyArgs>(args: SelectSubset<T, accountNumberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AccountNumber.
+     * @param {accountNumberUpsertArgs} args - Arguments to update or create a AccountNumber.
+     * @example
+     * // Update or create a AccountNumber
+     * const accountNumber = await prisma.accountNumber.upsert({
+     *   create: {
+     *     // ... data to create a AccountNumber
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AccountNumber we want to update
+     *   }
+     * })
+     */
+    upsert<T extends accountNumberUpsertArgs>(args: SelectSubset<T, accountNumberUpsertArgs<ExtArgs>>): Prisma__accountNumberClient<$Result.GetResult<Prisma.$accountNumberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AccountNumbers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {accountNumberCountArgs} args - Arguments to filter AccountNumbers to count.
+     * @example
+     * // Count the number of AccountNumbers
+     * const count = await prisma.accountNumber.count({
+     *   where: {
+     *     // ... the filter for the AccountNumbers we want to count
+     *   }
+     * })
+    **/
+    count<T extends accountNumberCountArgs>(
+      args?: Subset<T, accountNumberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccountNumberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AccountNumber.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccountNumberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccountNumberAggregateArgs>(args: Subset<T, AccountNumberAggregateArgs>): Prisma.PrismaPromise<GetAccountNumberAggregateType<T>>
+
+    /**
+     * Group by AccountNumber.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {accountNumberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends accountNumberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: accountNumberGroupByArgs['orderBy'] }
+        : { orderBy?: accountNumberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, accountNumberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccountNumberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the accountNumber model
+   */
+  readonly fields: accountNumberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for accountNumber.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__accountNumberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the accountNumber model
+   */
+  interface accountNumberFieldRefs {
+    readonly id: FieldRef<"accountNumber", 'Int'>
+    readonly accountNumber: FieldRef<"accountNumber", 'String'>
+    readonly bankName: FieldRef<"accountNumber", 'String'>
+    readonly ifscCode: FieldRef<"accountNumber", 'String'>
+    readonly createdAt: FieldRef<"accountNumber", 'DateTime'>
+    readonly updatedAt: FieldRef<"accountNumber", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * accountNumber findUnique
+   */
+  export type accountNumberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * Filter, which accountNumber to fetch.
+     */
+    where: accountNumberWhereUniqueInput
+  }
+
+  /**
+   * accountNumber findUniqueOrThrow
+   */
+  export type accountNumberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * Filter, which accountNumber to fetch.
+     */
+    where: accountNumberWhereUniqueInput
+  }
+
+  /**
+   * accountNumber findFirst
+   */
+  export type accountNumberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * Filter, which accountNumber to fetch.
+     */
+    where?: accountNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of accountNumbers to fetch.
+     */
+    orderBy?: accountNumberOrderByWithRelationInput | accountNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for accountNumbers.
+     */
+    cursor?: accountNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` accountNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` accountNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of accountNumbers.
+     */
+    distinct?: AccountNumberScalarFieldEnum | AccountNumberScalarFieldEnum[]
+  }
+
+  /**
+   * accountNumber findFirstOrThrow
+   */
+  export type accountNumberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * Filter, which accountNumber to fetch.
+     */
+    where?: accountNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of accountNumbers to fetch.
+     */
+    orderBy?: accountNumberOrderByWithRelationInput | accountNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for accountNumbers.
+     */
+    cursor?: accountNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` accountNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` accountNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of accountNumbers.
+     */
+    distinct?: AccountNumberScalarFieldEnum | AccountNumberScalarFieldEnum[]
+  }
+
+  /**
+   * accountNumber findMany
+   */
+  export type accountNumberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * Filter, which accountNumbers to fetch.
+     */
+    where?: accountNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of accountNumbers to fetch.
+     */
+    orderBy?: accountNumberOrderByWithRelationInput | accountNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing accountNumbers.
+     */
+    cursor?: accountNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` accountNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` accountNumbers.
+     */
+    skip?: number
+    distinct?: AccountNumberScalarFieldEnum | AccountNumberScalarFieldEnum[]
+  }
+
+  /**
+   * accountNumber create
+   */
+  export type accountNumberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * The data needed to create a accountNumber.
+     */
+    data: XOR<accountNumberCreateInput, accountNumberUncheckedCreateInput>
+  }
+
+  /**
+   * accountNumber createMany
+   */
+  export type accountNumberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many accountNumbers.
+     */
+    data: accountNumberCreateManyInput | accountNumberCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * accountNumber update
+   */
+  export type accountNumberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * The data needed to update a accountNumber.
+     */
+    data: XOR<accountNumberUpdateInput, accountNumberUncheckedUpdateInput>
+    /**
+     * Choose, which accountNumber to update.
+     */
+    where: accountNumberWhereUniqueInput
+  }
+
+  /**
+   * accountNumber updateMany
+   */
+  export type accountNumberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update accountNumbers.
+     */
+    data: XOR<accountNumberUpdateManyMutationInput, accountNumberUncheckedUpdateManyInput>
+    /**
+     * Filter which accountNumbers to update
+     */
+    where?: accountNumberWhereInput
+    /**
+     * Limit how many accountNumbers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * accountNumber upsert
+   */
+  export type accountNumberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * The filter to search for the accountNumber to update in case it exists.
+     */
+    where: accountNumberWhereUniqueInput
+    /**
+     * In case the accountNumber found by the `where` argument doesn't exist, create a new accountNumber with this data.
+     */
+    create: XOR<accountNumberCreateInput, accountNumberUncheckedCreateInput>
+    /**
+     * In case the accountNumber was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<accountNumberUpdateInput, accountNumberUncheckedUpdateInput>
+  }
+
+  /**
+   * accountNumber delete
+   */
+  export type accountNumberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+    /**
+     * Filter which accountNumber to delete.
+     */
+    where: accountNumberWhereUniqueInput
+  }
+
+  /**
+   * accountNumber deleteMany
+   */
+  export type accountNumberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which accountNumbers to delete
+     */
+    where?: accountNumberWhereInput
+    /**
+     * Limit how many accountNumbers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * accountNumber without action
+   */
+  export type accountNumberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the accountNumber
+     */
+    select?: accountNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the accountNumber
+     */
+    omit?: accountNumberOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7157,6 +8167,18 @@ export namespace Prisma {
   export type QRCodeScalarFieldEnum = (typeof QRCodeScalarFieldEnum)[keyof typeof QRCodeScalarFieldEnum]
 
 
+  export const AccountNumberScalarFieldEnum: {
+    id: 'id',
+    accountNumber: 'accountNumber',
+    bankName: 'bankName',
+    ifscCode: 'ifscCode',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AccountNumberScalarFieldEnum = (typeof AccountNumberScalarFieldEnum)[keyof typeof AccountNumberScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -7261,6 +8283,15 @@ export namespace Prisma {
   };
 
   export type QRCodeOrderByRelevanceFieldEnum = (typeof QRCodeOrderByRelevanceFieldEnum)[keyof typeof QRCodeOrderByRelevanceFieldEnum]
+
+
+  export const accountNumberOrderByRelevanceFieldEnum: {
+    accountNumber: 'accountNumber',
+    bankName: 'bankName',
+    ifscCode: 'ifscCode'
+  };
+
+  export type accountNumberOrderByRelevanceFieldEnum = (typeof accountNumberOrderByRelevanceFieldEnum)[keyof typeof accountNumberOrderByRelevanceFieldEnum]
 
 
   /**
@@ -7785,6 +8816,66 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"QRCode"> | Date | string
   }
 
+  export type accountNumberWhereInput = {
+    AND?: accountNumberWhereInput | accountNumberWhereInput[]
+    OR?: accountNumberWhereInput[]
+    NOT?: accountNumberWhereInput | accountNumberWhereInput[]
+    id?: IntFilter<"accountNumber"> | number
+    accountNumber?: StringFilter<"accountNumber"> | string
+    bankName?: StringFilter<"accountNumber"> | string
+    ifscCode?: StringFilter<"accountNumber"> | string
+    createdAt?: DateTimeFilter<"accountNumber"> | Date | string
+    updatedAt?: DateTimeFilter<"accountNumber"> | Date | string
+  }
+
+  export type accountNumberOrderByWithRelationInput = {
+    id?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    ifscCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: accountNumberOrderByRelevanceInput
+  }
+
+  export type accountNumberWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: accountNumberWhereInput | accountNumberWhereInput[]
+    OR?: accountNumberWhereInput[]
+    NOT?: accountNumberWhereInput | accountNumberWhereInput[]
+    accountNumber?: StringFilter<"accountNumber"> | string
+    bankName?: StringFilter<"accountNumber"> | string
+    ifscCode?: StringFilter<"accountNumber"> | string
+    createdAt?: DateTimeFilter<"accountNumber"> | Date | string
+    updatedAt?: DateTimeFilter<"accountNumber"> | Date | string
+  }, "id">
+
+  export type accountNumberOrderByWithAggregationInput = {
+    id?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    ifscCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: accountNumberCountOrderByAggregateInput
+    _avg?: accountNumberAvgOrderByAggregateInput
+    _max?: accountNumberMaxOrderByAggregateInput
+    _min?: accountNumberMinOrderByAggregateInput
+    _sum?: accountNumberSumOrderByAggregateInput
+  }
+
+  export type accountNumberScalarWhereWithAggregatesInput = {
+    AND?: accountNumberScalarWhereWithAggregatesInput | accountNumberScalarWhereWithAggregatesInput[]
+    OR?: accountNumberScalarWhereWithAggregatesInput[]
+    NOT?: accountNumberScalarWhereWithAggregatesInput | accountNumberScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"accountNumber"> | number
+    accountNumber?: StringWithAggregatesFilter<"accountNumber"> | string
+    bankName?: StringWithAggregatesFilter<"accountNumber"> | string
+    ifscCode?: StringWithAggregatesFilter<"accountNumber"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"accountNumber"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"accountNumber"> | Date | string
+  }
+
   export type AdminCreateInput = {
     name: string
     email: string
@@ -8292,6 +9383,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type accountNumberCreateInput = {
+    accountNumber: string
+    bankName: string
+    ifscCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type accountNumberUncheckedCreateInput = {
+    id?: number
+    accountNumber: string
+    bankName: string
+    ifscCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type accountNumberUpdateInput = {
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type accountNumberUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type accountNumberCreateManyInput = {
+    id?: number
+    accountNumber: string
+    bankName: string
+    ifscCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type accountNumberUpdateManyMutationInput = {
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type accountNumberUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    accountNumber?: StringFieldUpdateOperationsInput | string
+    bankName?: StringFieldUpdateOperationsInput | string
+    ifscCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -8773,6 +9924,47 @@ export namespace Prisma {
   }
 
   export type QRCodeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type accountNumberOrderByRelevanceInput = {
+    fields: accountNumberOrderByRelevanceFieldEnum | accountNumberOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type accountNumberCountOrderByAggregateInput = {
+    id?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    ifscCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type accountNumberAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type accountNumberMaxOrderByAggregateInput = {
+    id?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    ifscCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type accountNumberMinOrderByAggregateInput = {
+    id?: SortOrder
+    accountNumber?: SortOrder
+    bankName?: SortOrder
+    ifscCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type accountNumberSumOrderByAggregateInput = {
     id?: SortOrder
   }
 

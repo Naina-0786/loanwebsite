@@ -105,3 +105,12 @@ model QRCode {
   createdAt DateTime @default(now())
   updatedAt DateTime
 }
+
+model accountNumber {
+  id            Int      @id @default(autoincrement())
+  accountNumber String
+  bankName      String
+  ifscCode      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

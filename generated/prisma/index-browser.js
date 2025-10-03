@@ -195,6 +195,15 @@ exports.Prisma.QRCodeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AccountNumberScalarFieldEnum = {
+  id: 'id',
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  ifscCode: 'ifscCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -267,6 +276,12 @@ exports.Prisma.ContactOrderByRelevanceFieldEnum = {
 exports.Prisma.QRCodeOrderByRelevanceFieldEnum = {
   phone: 'phone'
 };
+
+exports.Prisma.accountNumberOrderByRelevanceFieldEnum = {
+  accountNumber: 'accountNumber',
+  bankName: 'bankName',
+  ifscCode: 'ifscCode'
+};
 exports.Status = exports.$Enums.Status = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -279,7 +294,8 @@ exports.Prisma.ModelName = {
   LoanApplication: 'LoanApplication',
   Otp: 'Otp',
   Contact: 'Contact',
-  QRCode: 'QRCode'
+  QRCode: 'QRCode',
+  accountNumber: 'accountNumber'
 };
 
 /**

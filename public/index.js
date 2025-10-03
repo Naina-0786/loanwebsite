@@ -1,14 +1,16 @@
-import express from "express";
-import errorMiddleware from "./middleware/error.middleware.js";
-import { requestOtp, verifyOtp } from "./controller/otp.js";
-import { deletePayment, getpymentById, grtAllPayment, updatePayment, updateLoanApplication, getLoanApplicationById, getAllLoanApplications, createPaymentFee, getPaymentFeeConfig, updatePaymentFeeConfig, getDashboardStats, updateFeeStatus, } from "./controller/application.js";
-import { uploadPaymentScreenshots } from "./middleware/multer.middleware.js";
-import cors from "cors";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import express from "express";
+import { AccountCreate, getOneAccount, updateAccount } from "./controller/account.js";
 import { AdminCreate, adminLogin, deleteAdmin, getAdminById, getAllAdmin, updateAdmin, } from "./controller/admin.js";
-import QrRoute from "./routes/qr.routes.js";
+import { createPaymentFee, getAllLoanApplications, getDashboardStats, getLoanApplicationById, getpymentById, updateFeeStatus, updateLoanApplication, updatePayment } from "./controller/application.js";
+import { requestOtp, verifyOtp } from "./controller/otp.js";
 import { adminAuth } from "./middleware/admin.middleware.js";
+import errorMiddleware from "./middleware/error.middleware.js";
+import { uploadPaymentScreenshots } from "./middleware/multer.middleware.js";
 import PaymentFeeRoute from "./routes/payment.route.js";
+import QrRoute from "./routes/qr.routes.js";
+import AccountNumberRoute from "./routes/account.routes.js";
 const app = express();
 // ================================
 // CORS CONFIG
@@ -87,6 +89,11 @@ app.get("/api/admin/all", getAllAdmin);
 app.put("/api/admin/:id", updateAdmin);
 app.delete("/api/admin/:id", deleteAdmin);
 app.get("/api/admin/:id", getAdminById);
+// Account
+// app.post("/api/account/create",  AccountCreate);
+app.get("/api/account", getOneAccount);
+app.put("/api/admin/account/update/:id", updateAccount);
+app.use("/api/account", AccountNumberRoute);
 // ================================
 // QR ROUTES
 // ================================
