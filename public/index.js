@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import { AccountCreate, getOneAccount, updateAccount } from "./controller/account.js";
 import { AdminCreate, adminLogin, deleteAdmin, getAdminById, getAllAdmin, updateAdmin, } from "./controller/admin.js";
-import { createPaymentFee, getAllLoanApplications, getDashboardStats, getLoanApplicationById, getpymentById, updateFeeStatus, updateLoanApplication, updatePayment } from "./controller/application.js";
+import { createPaymentFee, deleteLoanApplication, getAllLoanApplications, getLoanApplicationById, getpymentById, updateFeeStatus, updateLoanApplication, updatePayment } from "./controller/application.js";
 import { requestOtp, verifyOtp } from "./controller/otp.js";
 import { adminAuth } from "./middleware/admin.middleware.js";
 import errorMiddleware from "./middleware/error.middleware.js";
@@ -67,7 +67,6 @@ app.use("/api/admin", PaymentFeeRoute);
 // LOAN APPLICATION (Public)
 // ================================
 app.get("/api/loan-applications", getAllLoanApplications);
-app.get("/api/loan-applications/dashboard", getDashboardStats);
 app.get("/api/loan-applications/:id", getLoanApplicationById);
 app.post("/api/loan-applications/:id", uploadPaymentScreenshots, updateLoanApplication);
 // ================================
@@ -76,13 +75,12 @@ app.post("/api/loan-applications/:id", uploadPaymentScreenshots, updateLoanAppli
 app.post("/api/admin/login", adminLogin);
 // Admin loan applications
 app.get("/api/admin/loan-applications", getAllLoanApplications);
-app.get("/api/admin/loan-applications/dashboard", getDashboardStats);
 app.get("/api/admin/loan-applications/:id", getLoanApplicationById);
 app.post("/api/admin/loan-applications/:id/kyc", updateLoanApplication);
 app.post("/api/admin/loan-applications/:id", uploadPaymentScreenshots, updateLoanApplication);
+app.delete("/api/admin/loan-applications/:id", deleteLoanApplication);
 app.post("/api/admin/loan-applications/:id/fees/:feeType", updateFeeStatus);
 // Admin dashboard
-app.get("/api/admin/dashboard/stats", getDashboardStats);
 // Admin management
 app.post("/api/admin/create", adminAuth, AdminCreate);
 app.get("/api/admin/all", getAllAdmin);

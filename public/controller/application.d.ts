@@ -9,6 +9,6 @@ export declare const updatePaymentFeeConfig: (req: Request, res: import("express
 export declare const updateLoanApplication: (req: Request, res: import("express").Response, next: import("express").NextFunction) => void;
 export declare const getLoanApplicationById: (req: Request, res: import("express").Response, next: import("express").NextFunction) => void;
 export declare const getAllLoanApplications: (req: Request, res: import("express").Response, next: import("express").NextFunction) => void;
-export declare const getDashboardStats: (req: Request, res: import("express").Response, next: import("express").NextFunction) => void;
 export declare const updateFeeStatus: (req: Request, res: import("express").Response, next: import("express").NextFunction) => void;
+export declare const deleteLoanApplication: (req: Request, res: import("express").Response, next: import("express").NextFunction) => void;
 //# sourceMappingURL=application.d.ts.map

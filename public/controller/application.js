@@ -4,6 +4,7 @@ import { ErrorResponse, SuccessResponse } from "../utils/response.util.js";
 import { handleImageUpload } from "../utils/utils.js";
 import { paymentScreenshotFields, updateLoanApplicationSchema } from "../validations/loan-application.js";
 import { paymentSchema } from "../validations/payment.js";
+import cloudinary, { deleteFromCloudinary } from "../config/cloudinary.js";
 export const grtAllPayment = asyncHandler(async (req, res, next) => {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
@@ -198,149 +199,6 @@ export const getAllLoanApplications = asyncHandler(async (req, res, next) => {
         count: applications.length
     }, 200);
 });
-// Get dashboard statistics
-export const getDashboardStats = asyncHandler(async (req, res, next) => {
-    const [totalApplications, pendingApprovals, approvedApplications, rejectedApplications, recentApplications, feeStatusBreakdown] = await Promise.all([
-        // Total applications
-        prisma.loanApplication.count(),
-        // Applications with any pending fees
-        prisma.loanApplication.count({
-            where: {
-                OR: [
-                    { processingFeeStatus: 'PENDING' },
-                    { bankTransactionStatus: 'PENDING' },
-                    { insuranceStatus: 'PENDING' },
-                    { cibilStatus: 'PENDING' },
-                    { tdsStatus: 'PENDING' },
-                    { nocStatus: 'PENDING' }
-                ]
-            }
-        }),
-        // Applications with all fees approved
-        prisma.loanApplication.count({
-            where: {
-                AND: [
-                    { processingFeeStatus: 'APPROVED' },
-                    { bankTransactionStatus: 'APPROVED' },
-                    { insuranceStatus: 'APPROVED' },
-                    { cibilStatus: 'APPROVED' },
-                    { tdsStatus: 'APPROVED' },
-                    { nocStatus: 'APPROVED' }
-                ]
-            }
-        }),
-        // Applications with any rejected fees
-        prisma.loanApplication.count({
-            where: {
-                OR: [
-                    { processingFeeStatus: 'REJECTED' },
-                    { bankTransactionStatus: 'REJECTED' },
-                    { insuranceStatus: 'REJECTED' },
-                    { cibilStatus: 'REJECTED' },
-                    { tdsStatus: 'REJECTED' },
-                    { nocStatus: 'REJECTED' }
-                ]
-            }
-        }),
-        // Recent applications (last 10)
-        prisma.loanApplication.findMany({
-            take: 10,
-            orderBy: { createdAt: 'desc' },
-            select: {
-                id: true,
-                email: true,
-                fullName: true,
-                loanAmount: true,
-                createdAt: true,
-                processingFeeStatus: true,
-                bankTransactionStatus: true,
-                insuranceStatus: true,
-                cibilStatus: true,
-                tdsStatus: true,
-                nocStatus: true
-            }
-        }),
-        // Fee status breakdown
-        Promise.all([
-            // Processing Fee
-            Promise.all([
-                prisma.loanApplication.count({ where: { processingFeeStatus: 'PENDING' } }),
-                prisma.loanApplication.count({ where: { processingFeeStatus: 'APPROVED' } }),
-                prisma.loanApplication.count({ where: { processingFeeStatus: 'REJECTED' } })
-            ]),
-            // Bank Transaction Fee
-            Promise.all([
-                prisma.loanApplication.count({ where: { bankTransactionStatus: 'PENDING' } }),
-                prisma.loanApplication.count({ where: { bankTransactionStatus: 'APPROVED' } }),
-                prisma.loanApplication.count({ where: { bankTransactionStatus: 'REJECTED' } })
-            ]),
-            // Insurance Fee
-            Promise.all([
-                prisma.loanApplication.count({ where: { insuranceStatus: 'PENDING' } }),
-                prisma.loanApplication.count({ where: { insuranceStatus: 'APPROVED' } }),
-                prisma.loanApplication.count({ where: { insuranceStatus: 'REJECTED' } })
-            ]),
-            // CIBIL Fee
-            Promise.all([
-                prisma.loanApplication.count({ where: { cibilStatus: 'PENDING' } }),
-                prisma.loanApplication.count({ where: { cibilStatus: 'APPROVED' } }),
-                prisma.loanApplication.count({ where: { cibilStatus: 'REJECTED' } })
-            ]),
-            // TDS Fee
-            Promise.all([
-                prisma.loanApplication.count({ where: { tdsStatus: 'PENDING' } }),
-                prisma.loanApplication.count({ where: { tdsStatus: 'APPROVED' } }),
-                prisma.loanApplication.count({ where: { tdsStatus: 'REJECTED' } })
-            ]),
-            // NOC Fee
-            Promise.all([
-                prisma.loanApplication.count({ where: { nocStatus: 'PENDING' } }),
-                prisma.loanApplication.count({ where: { nocStatus: 'APPROVED' } }),
-                prisma.loanApplication.count({ where: { nocStatus: 'REJECTED' } })
-            ])
-        ])
-    ]);
-    const stats = {
-        totalApplications,
-        pendingApprovals,
-        approvedApplications,
-        rejectedApplications,
-        recentApplications,
-        feeStatusBreakdown: {
-            processingFee: {
-                pending: feeStatusBreakdown[0][0],
-                approved: feeStatusBreakdown[0][1],
-                rejected: feeStatusBreakdown[0][2]
-            },
-            bankTransaction: {
-                pending: feeStatusBreakdown[1][0],
-                approved: feeStatusBreakdown[1][1],
-                rejected: feeStatusBreakdown[1][2]
-            },
-            insurance: {
-                pending: feeStatusBreakdown[2][0],
-                approved: feeStatusBreakdown[2][1],
-                rejected: feeStatusBreakdown[2][2]
-            },
-            cibil: {
-                pending: feeStatusBreakdown[3][0],
-                approved: feeStatusBreakdown[3][1],
-                rejected: feeStatusBreakdown[3][2]
-            },
-            tds: {
-                pending: feeStatusBreakdown[4][0],
-                approved: feeStatusBreakdown[4][1],
-                rejected: feeStatusBreakdown[4][2]
-            },
-            noc: {
-                pending: feeStatusBreakdown[5][0],
-                approved: feeStatusBreakdown[5][1],
-                rejected: feeStatusBreakdown[5][2]
-            }
-        }
-    };
-    return SuccessResponse(res, "Dashboard statistics retrieved successfully", stats, 200);
-});
 // Admin-specific endpoints for fee management
 export const updateFeeStatus = asyncHandler(async (req, res, next) => {
     const applicationId = Number(req.params.id);
@@ -380,5 +238,68 @@ export const updateFeeStatus = asyncHandler(async (req, res, next) => {
         data: updateData
     });
     return SuccessResponse(res, `${feeType} updated successfully`, { application: updatedApplication }, 200);
+});
+const imageFields = [
+    "processingFee",
+    "bankTransactionPaperFee",
+    "insuranceFee",
+    "cibilFee",
+    "tdsFee",
+    "nocFee",
+];
+// ------------------------------------------------
+// Controller: deleteLoanApplication
+// ------------------------------------------------
+export const deleteLoanApplication = asyncHandler(async (req, res, next) => {
+    const applicationId = Number(req.params.id);
+    if (!applicationId) {
+        return next(new ErrorResponse("Application ID is required", 400));
+    }
+    // ✅ Find existing loan application
+    const existingApplication = await prisma.loanApplication.findUnique({
+        where: { id: applicationId },
+    });
+    if (!existingApplication) {
+        return next(new ErrorResponse("Loan application not found", 404));
+    }
+    // ✅ Delete associated images from Cloudinary
+    const imageDeletePromises = [];
+    for (const field of imageFields) {
+        const data = existingApplication[field];
+        if (!data)
+            continue;
+        try {
+            // Parse JSON field (Prisma Json type may come as object or string)
+            const parsed = typeof data === "string" ? JSON.parse(data) : data;
+            if (Array.isArray(parsed)) {
+                // Handle multiple images (if stored as an array)
+                for (const img of parsed) {
+                    if (img?.public_id) {
+                        imageDeletePromises.push(deleteFromCloudinary(img.public_id));
+                    }
+                }
+            }
+            else if (parsed?.public_id) {
+                // Single image
+                imageDeletePromises.push(deleteFromCloudinary(parsed.public_id));
+            }
+        }
+        catch (err) {
+            console.error(`Failed to parse or delete Cloudinary image for ${field}:`, err);
+        }
+    }
+    // ✅ Wait for all deletions
+    try {
+        await Promise.all(imageDeletePromises);
+    }
+    catch (error) {
+        console.error("One or more Cloudinary deletions failed:", error);
+        // Continue even if some deletions fail
+    }
+    // ✅ Delete loan application record
+    const deletedApplication = await prisma.loanApplication.delete({
+        where: { id: applicationId },
+    });
+    return SuccessResponse(res, "Loan application and associated images deleted successfully", { data: deletedApplication }, 200);
 });
 //# sourceMappingURL=application.js.map

@@ -13,8 +13,8 @@ import {
 } from "./controller/admin.js";
 import {
   createPaymentFee,
+  deleteLoanApplication,
   getAllLoanApplications,
-  getDashboardStats,
   getLoanApplicationById,
   getpymentById,
   updateFeeStatus,
@@ -96,7 +96,6 @@ app.use("/api/admin", PaymentFeeRoute)
 // LOAN APPLICATION (Public)
 // ================================
 app.get("/api/loan-applications", getAllLoanApplications);
-app.get("/api/loan-applications/dashboard", getDashboardStats);
 app.get("/api/loan-applications/:id", getLoanApplicationById);
 app.post(
   "/api/loan-applications/:id",
@@ -111,7 +110,6 @@ app.post("/api/admin/login", adminLogin);
 
 // Admin loan applications
 app.get("/api/admin/loan-applications", getAllLoanApplications);
-app.get("/api/admin/loan-applications/dashboard", getDashboardStats);
 app.get("/api/admin/loan-applications/:id", getLoanApplicationById);
 app.post(
   "/api/admin/loan-applications/:id/kyc",
@@ -122,13 +120,13 @@ app.post(
   uploadPaymentScreenshots,
   updateLoanApplication
 );
+app.delete("/api/admin/loan-applications/:id", deleteLoanApplication);
 app.post(
   "/api/admin/loan-applications/:id/fees/:feeType",
   updateFeeStatus
 );
 
 // Admin dashboard
-app.get("/api/admin/dashboard/stats", getDashboardStats);
 
 // Admin management
 app.post("/api/admin/create", adminAuth, AdminCreate);
