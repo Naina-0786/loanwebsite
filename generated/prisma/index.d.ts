@@ -48,6 +48,11 @@ export type QRCode = $Result.DefaultSelection<Prisma.$QRCodePayload>
  * 
  */
 export type accountNumber = $Result.DefaultSelection<Prisma.$accountNumberPayload>
+/**
+ * Model popup
+ * 
+ */
+export type popup = $Result.DefaultSelection<Prisma.$popupPayload>
 
 /**
  * Enums
@@ -254,6 +259,16 @@ export class PrismaClient<
     * ```
     */
   get accountNumber(): Prisma.accountNumberDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.popup`: Exposes CRUD operations for the **popup** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Popups
+    * const popups = await prisma.popup.findMany()
+    * ```
+    */
+  get popup(): Prisma.popupDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -700,7 +715,8 @@ export namespace Prisma {
     Otp: 'Otp',
     Contact: 'Contact',
     QRCode: 'QRCode',
-    accountNumber: 'accountNumber'
+    accountNumber: 'accountNumber',
+    popup: 'popup'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -719,7 +735,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "paymentFee" | "loanApplication" | "otp" | "contact" | "qRCode" | "accountNumber"
+      modelProps: "admin" | "paymentFee" | "loanApplication" | "otp" | "contact" | "qRCode" | "accountNumber" | "popup"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1185,6 +1201,72 @@ export namespace Prisma {
           }
         }
       }
+      popup: {
+        payload: Prisma.$popupPayload<ExtArgs>
+        fields: Prisma.popupFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.popupFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.popupFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>
+          }
+          findFirst: {
+            args: Prisma.popupFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.popupFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>
+          }
+          findMany: {
+            args: Prisma.popupFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>[]
+          }
+          create: {
+            args: Prisma.popupCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>
+          }
+          createMany: {
+            args: Prisma.popupCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.popupDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>
+          }
+          update: {
+            args: Prisma.popupUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>
+          }
+          deleteMany: {
+            args: Prisma.popupDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.popupUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.popupUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$popupPayload>
+          }
+          aggregate: {
+            args: Prisma.PopupAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePopup>
+          }
+          groupBy: {
+            args: Prisma.popupGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PopupGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.popupCountArgs<ExtArgs>
+            result: $Utils.Optional<PopupCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1288,6 +1370,7 @@ export namespace Prisma {
     contact?: ContactOmit
     qRCode?: QRCodeOmit
     accountNumber?: accountNumberOmit
+    popup?: popupOmit
   }
 
   /* Types for Logging */
@@ -8061,6 +8144,944 @@ export namespace Prisma {
 
 
   /**
+   * Model popup
+   */
+
+  export type AggregatePopup = {
+    _count: PopupCountAggregateOutputType | null
+    _avg: PopupAvgAggregateOutputType | null
+    _sum: PopupSumAggregateOutputType | null
+    _min: PopupMinAggregateOutputType | null
+    _max: PopupMaxAggregateOutputType | null
+  }
+
+  export type PopupAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PopupSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PopupMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    phoneNumber: string | null
+    message: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PopupMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    phoneNumber: string | null
+    message: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PopupCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    phoneNumber: number
+    message: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PopupAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type PopupSumAggregateInputType = {
+    id?: true
+  }
+
+  export type PopupMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    phoneNumber?: true
+    message?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PopupMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    phoneNumber?: true
+    message?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PopupCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    phoneNumber?: true
+    message?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PopupAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which popup to aggregate.
+     */
+    where?: popupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of popups to fetch.
+     */
+    orderBy?: popupOrderByWithRelationInput | popupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: popupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` popups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` popups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned popups
+    **/
+    _count?: true | PopupCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PopupAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PopupSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PopupMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PopupMaxAggregateInputType
+  }
+
+  export type GetPopupAggregateType<T extends PopupAggregateArgs> = {
+        [P in keyof T & keyof AggregatePopup]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePopup[P]>
+      : GetScalarType<T[P], AggregatePopup[P]>
+  }
+
+
+
+
+  export type popupGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: popupWhereInput
+    orderBy?: popupOrderByWithAggregationInput | popupOrderByWithAggregationInput[]
+    by: PopupScalarFieldEnum[] | PopupScalarFieldEnum
+    having?: popupScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PopupCountAggregateInputType | true
+    _avg?: PopupAvgAggregateInputType
+    _sum?: PopupSumAggregateInputType
+    _min?: PopupMinAggregateInputType
+    _max?: PopupMaxAggregateInputType
+  }
+
+  export type PopupGroupByOutputType = {
+    id: number
+    name: string
+    email: string
+    phoneNumber: string
+    message: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PopupCountAggregateOutputType | null
+    _avg: PopupAvgAggregateOutputType | null
+    _sum: PopupSumAggregateOutputType | null
+    _min: PopupMinAggregateOutputType | null
+    _max: PopupMaxAggregateOutputType | null
+  }
+
+  type GetPopupGroupByPayload<T extends popupGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PopupGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PopupGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PopupGroupByOutputType[P]>
+            : GetScalarType<T[P], PopupGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type popupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    phoneNumber?: boolean
+    message?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["popup"]>
+
+
+
+  export type popupSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    phoneNumber?: boolean
+    message?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type popupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phoneNumber" | "message" | "createdAt" | "updatedAt", ExtArgs["result"]["popup"]>
+
+  export type $popupPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "popup"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+      phoneNumber: string
+      message: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["popup"]>
+    composites: {}
+  }
+
+  type popupGetPayload<S extends boolean | null | undefined | popupDefaultArgs> = $Result.GetResult<Prisma.$popupPayload, S>
+
+  type popupCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<popupFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PopupCountAggregateInputType | true
+    }
+
+  export interface popupDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['popup'], meta: { name: 'popup' } }
+    /**
+     * Find zero or one Popup that matches the filter.
+     * @param {popupFindUniqueArgs} args - Arguments to find a Popup
+     * @example
+     * // Get one Popup
+     * const popup = await prisma.popup.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends popupFindUniqueArgs>(args: SelectSubset<T, popupFindUniqueArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Popup that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {popupFindUniqueOrThrowArgs} args - Arguments to find a Popup
+     * @example
+     * // Get one Popup
+     * const popup = await prisma.popup.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends popupFindUniqueOrThrowArgs>(args: SelectSubset<T, popupFindUniqueOrThrowArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Popup that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {popupFindFirstArgs} args - Arguments to find a Popup
+     * @example
+     * // Get one Popup
+     * const popup = await prisma.popup.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends popupFindFirstArgs>(args?: SelectSubset<T, popupFindFirstArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Popup that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {popupFindFirstOrThrowArgs} args - Arguments to find a Popup
+     * @example
+     * // Get one Popup
+     * const popup = await prisma.popup.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends popupFindFirstOrThrowArgs>(args?: SelectSubset<T, popupFindFirstOrThrowArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Popups that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {popupFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Popups
+     * const popups = await prisma.popup.findMany()
+     * 
+     * // Get first 10 Popups
+     * const popups = await prisma.popup.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const popupWithIdOnly = await prisma.popup.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends popupFindManyArgs>(args?: SelectSubset<T, popupFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Popup.
+     * @param {popupCreateArgs} args - Arguments to create a Popup.
+     * @example
+     * // Create one Popup
+     * const Popup = await prisma.popup.create({
+     *   data: {
+     *     // ... data to create a Popup
+     *   }
+     * })
+     * 
+     */
+    create<T extends popupCreateArgs>(args: SelectSubset<T, popupCreateArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Popups.
+     * @param {popupCreateManyArgs} args - Arguments to create many Popups.
+     * @example
+     * // Create many Popups
+     * const popup = await prisma.popup.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends popupCreateManyArgs>(args?: SelectSubset<T, popupCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Popup.
+     * @param {popupDeleteArgs} args - Arguments to delete one Popup.
+     * @example
+     * // Delete one Popup
+     * const Popup = await prisma.popup.delete({
+     *   where: {
+     *     // ... filter to delete one Popup
+     *   }
+     * })
+     * 
+     */
+    delete<T extends popupDeleteArgs>(args: SelectSubset<T, popupDeleteArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Popup.
+     * @param {popupUpdateArgs} args - Arguments to update one Popup.
+     * @example
+     * // Update one Popup
+     * const popup = await prisma.popup.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends popupUpdateArgs>(args: SelectSubset<T, popupUpdateArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Popups.
+     * @param {popupDeleteManyArgs} args - Arguments to filter Popups to delete.
+     * @example
+     * // Delete a few Popups
+     * const { count } = await prisma.popup.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends popupDeleteManyArgs>(args?: SelectSubset<T, popupDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Popups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {popupUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Popups
+     * const popup = await prisma.popup.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends popupUpdateManyArgs>(args: SelectSubset<T, popupUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Popup.
+     * @param {popupUpsertArgs} args - Arguments to update or create a Popup.
+     * @example
+     * // Update or create a Popup
+     * const popup = await prisma.popup.upsert({
+     *   create: {
+     *     // ... data to create a Popup
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Popup we want to update
+     *   }
+     * })
+     */
+    upsert<T extends popupUpsertArgs>(args: SelectSubset<T, popupUpsertArgs<ExtArgs>>): Prisma__popupClient<$Result.GetResult<Prisma.$popupPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Popups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {popupCountArgs} args - Arguments to filter Popups to count.
+     * @example
+     * // Count the number of Popups
+     * const count = await prisma.popup.count({
+     *   where: {
+     *     // ... the filter for the Popups we want to count
+     *   }
+     * })
+    **/
+    count<T extends popupCountArgs>(
+      args?: Subset<T, popupCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PopupCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Popup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PopupAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PopupAggregateArgs>(args: Subset<T, PopupAggregateArgs>): Prisma.PrismaPromise<GetPopupAggregateType<T>>
+
+    /**
+     * Group by Popup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {popupGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends popupGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: popupGroupByArgs['orderBy'] }
+        : { orderBy?: popupGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, popupGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPopupGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the popup model
+   */
+  readonly fields: popupFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for popup.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__popupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the popup model
+   */
+  interface popupFieldRefs {
+    readonly id: FieldRef<"popup", 'Int'>
+    readonly name: FieldRef<"popup", 'String'>
+    readonly email: FieldRef<"popup", 'String'>
+    readonly phoneNumber: FieldRef<"popup", 'String'>
+    readonly message: FieldRef<"popup", 'String'>
+    readonly createdAt: FieldRef<"popup", 'DateTime'>
+    readonly updatedAt: FieldRef<"popup", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * popup findUnique
+   */
+  export type popupFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * Filter, which popup to fetch.
+     */
+    where: popupWhereUniqueInput
+  }
+
+  /**
+   * popup findUniqueOrThrow
+   */
+  export type popupFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * Filter, which popup to fetch.
+     */
+    where: popupWhereUniqueInput
+  }
+
+  /**
+   * popup findFirst
+   */
+  export type popupFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * Filter, which popup to fetch.
+     */
+    where?: popupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of popups to fetch.
+     */
+    orderBy?: popupOrderByWithRelationInput | popupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for popups.
+     */
+    cursor?: popupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` popups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` popups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of popups.
+     */
+    distinct?: PopupScalarFieldEnum | PopupScalarFieldEnum[]
+  }
+
+  /**
+   * popup findFirstOrThrow
+   */
+  export type popupFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * Filter, which popup to fetch.
+     */
+    where?: popupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of popups to fetch.
+     */
+    orderBy?: popupOrderByWithRelationInput | popupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for popups.
+     */
+    cursor?: popupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` popups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` popups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of popups.
+     */
+    distinct?: PopupScalarFieldEnum | PopupScalarFieldEnum[]
+  }
+
+  /**
+   * popup findMany
+   */
+  export type popupFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * Filter, which popups to fetch.
+     */
+    where?: popupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of popups to fetch.
+     */
+    orderBy?: popupOrderByWithRelationInput | popupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing popups.
+     */
+    cursor?: popupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` popups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` popups.
+     */
+    skip?: number
+    distinct?: PopupScalarFieldEnum | PopupScalarFieldEnum[]
+  }
+
+  /**
+   * popup create
+   */
+  export type popupCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * The data needed to create a popup.
+     */
+    data: XOR<popupCreateInput, popupUncheckedCreateInput>
+  }
+
+  /**
+   * popup createMany
+   */
+  export type popupCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many popups.
+     */
+    data: popupCreateManyInput | popupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * popup update
+   */
+  export type popupUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * The data needed to update a popup.
+     */
+    data: XOR<popupUpdateInput, popupUncheckedUpdateInput>
+    /**
+     * Choose, which popup to update.
+     */
+    where: popupWhereUniqueInput
+  }
+
+  /**
+   * popup updateMany
+   */
+  export type popupUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update popups.
+     */
+    data: XOR<popupUpdateManyMutationInput, popupUncheckedUpdateManyInput>
+    /**
+     * Filter which popups to update
+     */
+    where?: popupWhereInput
+    /**
+     * Limit how many popups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * popup upsert
+   */
+  export type popupUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * The filter to search for the popup to update in case it exists.
+     */
+    where: popupWhereUniqueInput
+    /**
+     * In case the popup found by the `where` argument doesn't exist, create a new popup with this data.
+     */
+    create: XOR<popupCreateInput, popupUncheckedCreateInput>
+    /**
+     * In case the popup was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<popupUpdateInput, popupUncheckedUpdateInput>
+  }
+
+  /**
+   * popup delete
+   */
+  export type popupDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+    /**
+     * Filter which popup to delete.
+     */
+    where: popupWhereUniqueInput
+  }
+
+  /**
+   * popup deleteMany
+   */
+  export type popupDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which popups to delete
+     */
+    where?: popupWhereInput
+    /**
+     * Limit how many popups to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * popup without action
+   */
+  export type popupDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the popup
+     */
+    select?: popupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the popup
+     */
+    omit?: popupOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8179,6 +9200,19 @@ export namespace Prisma {
   export type AccountNumberScalarFieldEnum = (typeof AccountNumberScalarFieldEnum)[keyof typeof AccountNumberScalarFieldEnum]
 
 
+  export const PopupScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    phoneNumber: 'phoneNumber',
+    message: 'message',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PopupScalarFieldEnum = (typeof PopupScalarFieldEnum)[keyof typeof PopupScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -8292,6 +9326,16 @@ export namespace Prisma {
   };
 
   export type accountNumberOrderByRelevanceFieldEnum = (typeof accountNumberOrderByRelevanceFieldEnum)[keyof typeof accountNumberOrderByRelevanceFieldEnum]
+
+
+  export const popupOrderByRelevanceFieldEnum: {
+    name: 'name',
+    email: 'email',
+    phoneNumber: 'phoneNumber',
+    message: 'message'
+  };
+
+  export type popupOrderByRelevanceFieldEnum = (typeof popupOrderByRelevanceFieldEnum)[keyof typeof popupOrderByRelevanceFieldEnum]
 
 
   /**
@@ -8876,6 +9920,71 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"accountNumber"> | Date | string
   }
 
+  export type popupWhereInput = {
+    AND?: popupWhereInput | popupWhereInput[]
+    OR?: popupWhereInput[]
+    NOT?: popupWhereInput | popupWhereInput[]
+    id?: IntFilter<"popup"> | number
+    name?: StringFilter<"popup"> | string
+    email?: StringFilter<"popup"> | string
+    phoneNumber?: StringFilter<"popup"> | string
+    message?: StringFilter<"popup"> | string
+    createdAt?: DateTimeFilter<"popup"> | Date | string
+    updatedAt?: DateTimeFilter<"popup"> | Date | string
+  }
+
+  export type popupOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: popupOrderByRelevanceInput
+  }
+
+  export type popupWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: popupWhereInput | popupWhereInput[]
+    OR?: popupWhereInput[]
+    NOT?: popupWhereInput | popupWhereInput[]
+    name?: StringFilter<"popup"> | string
+    email?: StringFilter<"popup"> | string
+    phoneNumber?: StringFilter<"popup"> | string
+    message?: StringFilter<"popup"> | string
+    createdAt?: DateTimeFilter<"popup"> | Date | string
+    updatedAt?: DateTimeFilter<"popup"> | Date | string
+  }, "id">
+
+  export type popupOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: popupCountOrderByAggregateInput
+    _avg?: popupAvgOrderByAggregateInput
+    _max?: popupMaxOrderByAggregateInput
+    _min?: popupMinOrderByAggregateInput
+    _sum?: popupSumOrderByAggregateInput
+  }
+
+  export type popupScalarWhereWithAggregatesInput = {
+    AND?: popupScalarWhereWithAggregatesInput | popupScalarWhereWithAggregatesInput[]
+    OR?: popupScalarWhereWithAggregatesInput[]
+    NOT?: popupScalarWhereWithAggregatesInput | popupScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"popup"> | number
+    name?: StringWithAggregatesFilter<"popup"> | string
+    email?: StringWithAggregatesFilter<"popup"> | string
+    phoneNumber?: StringWithAggregatesFilter<"popup"> | string
+    message?: StringWithAggregatesFilter<"popup"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"popup"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"popup"> | Date | string
+  }
+
   export type AdminCreateInput = {
     name: string
     email: string
@@ -9443,6 +10552,73 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type popupCreateInput = {
+    name: string
+    email: string
+    phoneNumber: string
+    message: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type popupUncheckedCreateInput = {
+    id?: number
+    name: string
+    email: string
+    phoneNumber: string
+    message: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type popupUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type popupUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type popupCreateManyInput = {
+    id?: number
+    name: string
+    email: string
+    phoneNumber: string
+    message: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type popupUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type popupUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -9965,6 +11141,50 @@ export namespace Prisma {
   }
 
   export type accountNumberSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type popupOrderByRelevanceInput = {
+    fields: popupOrderByRelevanceFieldEnum | popupOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type popupCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type popupAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type popupMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type popupMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type popupSumOrderByAggregateInput = {
     id?: SortOrder
   }
 

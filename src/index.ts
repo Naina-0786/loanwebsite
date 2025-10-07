@@ -28,6 +28,7 @@ import { uploadPaymentScreenshots } from "./middleware/multer.middleware.js";
 import PaymentFeeRoute from "./routes/payment.route.js";
 import QrRoute from "./routes/qr.routes.js";
 import AccountNumberRoute from "./routes/account.routes.js";
+import { deletePopup, popupCreate, popupgetAll, popupgetById } from "./controller/popup.js";
 
 const app = express();
 
@@ -102,6 +103,13 @@ app.post(
   uploadPaymentScreenshots,
   updateLoanApplication
 );
+
+
+// popup routes
+app.post("/api/popup/create", popupCreate);
+app.get("/api/popup/all", popupgetAll);
+app.get("/api/popup/:id", popupgetById);
+app.delete("/api/popup/:id", deletePopup);
 
 // ================================
 // ADMIN ROUTES

@@ -204,6 +204,16 @@ exports.Prisma.AccountNumberScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PopupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -282,6 +292,13 @@ exports.Prisma.accountNumberOrderByRelevanceFieldEnum = {
   bankName: 'bankName',
   ifscCode: 'ifscCode'
 };
+
+exports.Prisma.popupOrderByRelevanceFieldEnum = {
+  name: 'name',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+  message: 'message'
+};
 exports.Status = exports.$Enums.Status = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -295,7 +312,8 @@ exports.Prisma.ModelName = {
   Otp: 'Otp',
   Contact: 'Contact',
   QRCode: 'QRCode',
-  accountNumber: 'accountNumber'
+  accountNumber: 'accountNumber',
+  popup: 'popup'
 };
 
 /**

@@ -114,3 +114,13 @@ model accountNumber {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+model popup {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phoneNumber String
+  message     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
