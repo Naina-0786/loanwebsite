@@ -29,6 +29,7 @@ import PaymentFeeRoute from "./routes/payment.route.js";
 import QrRoute from "./routes/qr.routes.js";
 import AccountNumberRoute from "./routes/account.routes.js";
 import { deletePopup, popupCreate, popupgetAll, popupgetById } from "./controller/popup.js";
+import ContactRoute from "./routes/contact.routes.js";
 
 const app = express();
 
@@ -151,6 +152,8 @@ app.put("/api/admin/account/update/:id", updateAccount);
 
 
 app.use("/api/account", AccountNumberRoute);
+
+app.use("/api/contact", ContactRoute)
 
 // ================================
 // QR ROUTES

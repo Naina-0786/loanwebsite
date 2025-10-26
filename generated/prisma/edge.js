@@ -298,7 +298,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Lenovo\\Desktop\\loans\\backend\\generated\\prisma",
+      "value": "C:\\Users\\Lenovo\\Desktop\\symbosys\\dhani-finance\\loanwebsite\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -312,7 +312,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Lenovo\\Desktop\\loans\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Lenovo\\Desktop\\symbosys\\dhani-finance\\loanwebsite\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
